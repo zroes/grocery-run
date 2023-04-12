@@ -3,9 +3,17 @@
     <Navbar />
   </header>
   <main>
+    <h1 class="p-4 selectable bg-primary"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-secondary"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-grey"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-dark"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-light"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-warning"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-danger"> Awesome!</h1>
+    <h1 class="p-4 selectable bg-success"> Awesome!</h1>
     <router-view />
   </main>
-   <footer class="bg-dark text-light">
+  <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer>
 </template>
@@ -27,7 +35,7 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-:root{
+:root {
   --main-height: calc(100vh - 32px - 64px);
 }
 
