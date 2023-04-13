@@ -4,6 +4,7 @@ import { krogerAuthorizationService } from "./KrogerAuthorizationService.js";
 class SearchService {
     async getKrogerSearch(query) {
         // let res = []
+
         let token = await krogerAuthorizationService.getAuthorization()
         // query.queries.forEach(async q => {
         // q = q.replace(/\s+/g, '')
