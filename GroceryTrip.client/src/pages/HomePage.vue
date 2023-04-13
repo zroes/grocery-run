@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <!--NOTE search bar goes here -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center p-2 mt-1">
 
       <!-- STUB Search Bar Component -->
       <SearchBar />
@@ -17,7 +17,7 @@
 
 
     <!-- SECTION Lists -->
-    <section class="row justify-content-center my-3 bg-grey py-2">
+    <section class="row justify-content-center mb-3 mt-1 bg-grey py-2">
       <MyLists />
     </section>
   </div>
