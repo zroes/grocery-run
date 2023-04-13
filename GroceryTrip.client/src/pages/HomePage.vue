@@ -10,7 +10,7 @@
     </div>
 
 
-    <!-- SECTION Trip componenet goes here -->
+    <!-- SECTION Trip component goes here -->
     <section class="row">
 
     </section>
