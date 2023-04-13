@@ -22,6 +22,11 @@ const routes = [
     name: 'SearchResults',
     component: loadPage('SearchResultsPage'),
   },
+  {
+    path: '/lists/:listId',
+    name: 'ListDetails',
+    component: loadPage('ListDetailsPage')
+  },
 ]
 
 export const router = createRouter({

@@ -15,7 +15,7 @@
 
 
     <!-- SECTION Lists -->
-    <section class="row justify-content-center mb-3 mt-1 bg-grey py-2">
+    <section class="row justify-content-center mb-3 rounded m-1 bg-grey py-2">
       <MyLists />
     </section>
   </div>
@@ -23,7 +23,7 @@
 
 <script>
 import MyLists from "../components/MyLists.vue"
-import SearchBar from "../components/SearchBar.vue";
+import SearchBar from "../components/SearchBar.vue"
 
 export default {
   setup() {

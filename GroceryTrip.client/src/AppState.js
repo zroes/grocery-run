@@ -13,4 +13,8 @@ export const AppState = reactive({
   filteredArray: [],
 
   toggle: false,
+  activeGroceryList: null,
+  activeGroceryListItems: [],
+  groceryLists: [],
+
 })
