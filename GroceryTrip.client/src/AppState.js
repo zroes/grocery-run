@@ -4,5 +4,17 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   /** @type {import('./models/Account.js').Account} */
-  account: {}
+  account: {},
+
+  /** @type {import('./models/SearchResult.js').SearchResult[]} */
+  searchResults: [],
+
+  /** @type {import('./models/SearchResult.js').SearchResult[]} */
+  filteredArray: [],
+
+  toggle: false,
+  activeGroceryList: null,
+  activeGroceryListItems: [],
+  groceryLists: [],
+
 })
