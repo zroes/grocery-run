@@ -14,11 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@bcwdev/auth0provider": "1.0.14",
-<<<<<<< HEAD
     "axios": "0.24.0",
-=======
-    "axios": "^1.3.5",
->>>>>>> d363baf19c5bd75c1740d84a689d0849136ea33f
     "cors": "2.8.5",
     "dotenv": "16.0.3",
     "esm": "3.2.25",

@@ -46,34 +46,34 @@ export default {
   setup() {
     const route = useRoute();
 
-    // watchEffect(() => {
-    //   route.params
-    //   sortSearchResults();
-    // })
+    watchEffect(() => {
+      route.params
+      sortSearchResults();
+    })
 
-    // async function getSearchResults() {
-    //   try {
-    //     const search = {
-    //       queries: route.params.searchQuery
-    //     }
-    //     const searchData = await searchesService.getSearchResults(search);
-    //     return searchData
-    //   } catch (error) {
-    //     logger.error(error.message);
-    //     Pop.error(error.message);
-    //   }
-    // }
+    async function getSearchResults() {
+      try {
+        const search = {
+          queries: route.params.searchQuery
+        }
+        const searchData = await searchesService.getSearchResults(search);
+        return searchData
+      } catch (error) {
+        logger.error(error.message);
+        Pop.error(error.message);
+      }
+    }
 
 
-    // async function sortSearchResults() {
-    //   try {
-    //     const searchData = await getSearchResults();
-    //     await searchesService.sortSearchResults(searchData, route.params.sortType);
-    //   } catch (error) {
-    //     logger.error(error.message);
-    //     Pop.error(error.message);
-    //   }
-    // }
+    async function sortSearchResults() {
+      try {
+        const searchData = await getSearchResults();
+        await searchesService.sortSearchResults(searchData, route.params.sortType);
+      } catch (error) {
+        logger.error(error.message);
+        Pop.error(error.message);
+      }
+    }
 
     return {
       route,
