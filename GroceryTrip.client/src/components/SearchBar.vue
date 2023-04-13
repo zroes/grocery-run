@@ -15,11 +15,16 @@ import { ref } from 'vue';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { router } from '../router';
+import { useRoute } from 'vue-router';
 
 export default {
-  setup() {
+  props: {
+    sortType: { type: String, required: true }
+  },
+  setup(props) {
+    const route = useRoute();
 
-    const editable = ref({})
+    const editable = ref({ ...{ search: route.params.searchQuery } })
 
     return {
       editable,
@@ -28,7 +33,7 @@ export default {
         try {
           logger.log(`Searching`)
           let query = editable.value.search
-          router.push({ name: 'SearchResults', params: { searchQuery: query } })
+          router.push({ name: 'SearchResults', params: { searchQuery: query, sortType: props.sortType } })
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);
