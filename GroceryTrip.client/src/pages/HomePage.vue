@@ -3,9 +3,10 @@
 
     <!--NOTE search bar goes here -->
     <div class="row justify-content-center">
-      <div class="col-md-5">
-        <input class="form-control" type="text" placeholder="Search...">
-      </div>
+
+      <!-- STUB Search Bar Component -->
+      <SearchBar />
+
     </div>
 
 
@@ -24,12 +25,13 @@
 
 <script>
 import MyLists from "../components/MyLists.vue"
+import SearchBar from "../components/SearchBar.vue";
 
 export default {
   setup() {
     return {}
   },
-  components: { MyLists }
+  components: { MyLists, SearchBar }
 }
 </script>
 

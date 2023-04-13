@@ -16,7 +16,12 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
-  }
+  },
+  {
+    path: '/searchResults/:searchQuery',
+    name: 'SearchResults',
+    component: loadPage('SearchResultsPage'),
+  },
 ]
 
 export const router = createRouter({
