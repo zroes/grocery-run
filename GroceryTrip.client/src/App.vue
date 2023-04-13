@@ -3,18 +3,18 @@
     <Navbar />
   </header>
   <main>
-    <h1 class="p-4 selectable bg-primary"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-secondary"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-grey"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-dark"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-light"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-warning"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-danger"> Awesome!</h1>
-    <h1 class="p-4 selectable bg-success"> Awesome!</h1>
+    <h1 class="p-4 bg-primary"> Test!</h1>
+    <h1 class="p-4 bg-secondary"> Test!</h1>
+    <h1 class="p-4 bg-grey"> Test!</h1>
+    <h1 class="p-4 bg-dark"> Test!</h1>
+    <h1 class="p-4 bg-light"> Test!</h1>
+    <h1 class="p-4 bg-warning"> Test!</h1>
+    <h1 class="p-4 bg-danger"> Test!</h1>
+    <h1 class="p-4 bg-success"> Test!</h1>
     <router-view />
   </main>
   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+    •••
   </footer>
 </template>
 
