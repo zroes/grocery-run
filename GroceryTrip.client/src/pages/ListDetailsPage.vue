@@ -1,7 +1,8 @@
 <template>
-  <h1 class="p-3 text-light">{{ groceryList?.name }}</h1>
+  <h1 class="bigger p-3 text-light">{{ groceryList?.name }}</h1>
   <ul class="container-fluid">
-    <div v-for="(item, index) in groceryListItems" class="row p-2 selectable" :class="{ 'bg-grey': index % 2 == 0 }">
+    <div v-for="(item, index) in groceryListItems" class="row p-2 selectable justify-content-between"
+      :class="{ 'bg-grey': index % 2 == 0 }">
       <li class="text-light d-flex">
         <h5 class="my-3 col-8">•{{ item.name }}</h5>
         <div class="text-end my-2 col">
@@ -9,7 +10,7 @@
             'btn-secondary': index % 2 == 0,
             'btn-grey': index % 2 == 1
           }"-->
-            <i class="mdi mdi-delete"></i></button>
+            <i class="mdi mdi-delete-outline"></i></button>
         </div>
       </li>
     </div>
@@ -24,7 +25,7 @@
         <button @click="switchToggle" class="col-4 btn btn-danger">Cancel</button>
       </div>
     </div>
-    <button v-if="!toggle" @click="switchToggle" class="btn btn-dark"><i class="mdi mdi-note-plus-outline"> Add
+    <button v-if="!toggle" @click="switchToggle" class="my-3 btn btn-dark"><i class="mdi mdi-note-plus-outline"> Add
         Item</i></button>
   </ul>
 </template>
@@ -69,7 +70,7 @@ export default {
         getItemsOnList()
       }
     })
-    // onMounted(() => { getItemsOnList() })
+    onMounted(() => { AppState.activeGroceryListItems = [] })
     return {
       editable,
       groceryList: computed(() => AppState.activeGroceryList),

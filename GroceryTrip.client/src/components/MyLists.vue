@@ -1,12 +1,12 @@
 <template>
-  <div class="col-5 text-center border-success border-custom">
-    <h1 class="text-success mbn-1">My Lists</h1>
+  <div class="col-2"></div>
+  <div class="col-6 text-center border-success border-custom my-4">
+    <h1 class="text-success bigger mb-0">My Lists</h1>
   </div>
-  <div class="col-11 text-end mtn-3">
-    <div class="row justify-content-end">
-      <button @click="switchToggle" class="btn btn-warning px-0 col-3">Add List</button>
-    </div>
+  <div class="col-2 d-flex my-4 align-items-center">
+    <button @click="switchToggle" title="Add Item" class="btn btn-warning"><i class="mdi mdi-plus"></i></button>
   </div>
+
   <div v-if="toggle" class="col-11 my-3">
     <div class="row justify-content-between">
       <input v-model="editable.name" type="text" class="form-control col-8" name="" id="" placeholder="Name your list">
@@ -14,12 +14,14 @@
       <button @click="createList" class="col-3 btn btn-primary my-4">Create</button>
     </div>
   </div>
+
+
   <div class="col-12">
     <div class="row">
-      <div v-for="list in groceryLists" class="col text-nowrap my-2">
+      <div v-for="list in groceryLists" class="col text-nowrap my-3">
         <!-- NOTE Break into component -->
         <router-link v-if="list?.id" :to="{ name: 'ListDetails', params: { listId: list.id } }">
-          <div class="px-3 p-2 bg-light rounded">
+          <div class="p-3 bg-light rounded">
             <h3 class="text-center">{{ list.name }}</h3>
           </div>
         </router-link>
@@ -87,15 +89,5 @@ export default {
 <style scoped>
 .border-custom {
   border-bottom: 5px solid;
-}
-
-
-.mbn-1 {
-  /* margin-top: -1em; */
-  margin-bottom: -1px;
-}
-
-.mtn-3 {
-  margin-top: -35px;
 }
 </style>
