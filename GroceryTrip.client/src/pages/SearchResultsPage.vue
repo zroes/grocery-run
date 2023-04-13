@@ -54,7 +54,7 @@ export default {
     async function getSearchResults() {
       try {
         const search = {
-          queries: route.params.searchQuery
+          query: route.params.searchQuery
         }
         const searchData = await searchesService.getSearchResults(search);
         return searchData

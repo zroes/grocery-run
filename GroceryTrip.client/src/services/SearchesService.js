@@ -5,7 +5,8 @@ import { api } from "./AxiosService.js";
 
 class SearchesService {
   async getSearchResults(search) {
-    const res = await api.get('api/search', search)
+    logger.log(search)
+    const res = await api.post('api/search', search)
     return res.data
 
   }
