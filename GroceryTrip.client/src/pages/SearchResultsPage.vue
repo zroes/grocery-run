@@ -39,10 +39,42 @@ import { useRoute } from 'vue-router';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { router } from '../router';
+import { watchEffect } from 'vue';
+import { searchesService } from '../services/SearchesService';
 
 export default {
   setup() {
     const route = useRoute();
+
+    // watchEffect(() => {
+    //   route.params
+    //   sortSearchResults();
+    // })
+
+    // async function getSearchResults() {
+    //   try {
+    //     const search = {
+    //       queries: route.params.searchQuery
+    //     }
+    //     const searchData = await searchesService.getSearchResults(search);
+    //     return searchData
+    //   } catch (error) {
+    //     logger.error(error.message);
+    //     Pop.error(error.message);
+    //   }
+    // }
+
+
+    // async function sortSearchResults() {
+    //   try {
+    //     const searchData = await getSearchResults();
+    //     await searchesService.sortSearchResults(searchData, route.params.sortType);
+    //   } catch (error) {
+    //     logger.error(error.message);
+    //     Pop.error(error.message);
+    //   }
+    // }
+
     return {
       route,
 
@@ -52,6 +84,13 @@ export default {
       async setSortType(newSortType) {
         try {
           router.push({ name: 'SearchResults', params: { searchQuery: route.params.searchQuery, sortType: newSortType } })
+          if (newSortType == 'distance') {
+            this.priceCheck = false
+            this.distanceCheck = true
+          } else {
+            this.priceCheck = true
+            this.distanceCheck = false
+          }
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);
