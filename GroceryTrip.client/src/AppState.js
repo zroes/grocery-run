@@ -7,4 +7,8 @@ export const AppState = reactive({
   account: {},
 
   toggle: false,
+  activeGroceryList: null,
+  activeGroceryListItems: [],
+  groceryLists: [],
+
 })
