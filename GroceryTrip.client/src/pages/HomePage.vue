@@ -3,10 +3,8 @@
 
     <!--NOTE search bar goes here -->
     <div class="row justify-content-center p-2 mt-1">
-
       <!-- STUB Search Bar Component -->
       <SearchBar />
-
     </div>
 
 

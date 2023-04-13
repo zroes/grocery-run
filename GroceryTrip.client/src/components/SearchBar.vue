@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-5 col-9">
+  <div class="col-md-5 col-9 p-0">
     <form @submit.prevent="search()" class="d-flex">
       <input class="form-control" type="text" id="search" required placeholder="Search..." v-model="editable.search"
         minlength="3" maxlength="25">
