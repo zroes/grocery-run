@@ -59,7 +59,7 @@ class AccountService {
   async addLocations(latLong) {
     let token = await krogerAuthorizationService.getAuthorization()
 
-    const locations = await Kroger.get('locations', {
+    const res = await Kroger.get('locations', {
       headers:
         { 'Authorization': `Bearer ${token}` },
 
@@ -67,13 +67,14 @@ class AccountService {
         'filter.latLong.near': `${latLong.lat},${latLong.long}`
       }
     })
-    return locations
-    // let distance = []
-    // for (let index = 0; index < 2; index++) {
-    //   const element = locations[index];
-    //   distance.push(getDistance(element.geolocation, latLong))
-    // }
-    // return distance
+    // return locations
+    const parsedLocations = JSON.parse(res.data)
+    let distance = []
+    for (let index = 0; index < 2; index++) {
+      const element = parsedLocations[index];
+      distance.push(getDistance(element.geolocation, latLong))
+    }
+    return distance
   }
   // 
   /**
