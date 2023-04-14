@@ -23,7 +23,11 @@ export default {
           async function success(pos) {
             const crd = pos.coords
             logger.log(crd.latitude, crd.longitude)
-            await accountService.sendLatLong(`${crd.latitude},${crd.longitude}`)
+            const coords = {
+              lat: crd.latitude,
+              long: crd.longitude
+            }
+            await accountService.sendLatLong(coords)
           }
           navigator.geolocation.getCurrentPosition(success)
         } catch (error) {
