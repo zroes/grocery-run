@@ -1,7 +1,7 @@
-import { AppState } from "../AppState.js";
-import { SearchResult } from "../models/SearchResult.js";
-import { logger } from "../utils/Logger.js";
-import { api } from "./AxiosService.js";
+import { AppState } from "../AppState.js"
+import { SearchResult } from "../models/SearchResult.js"
+import { logger } from "../utils/Logger.js"
+import { api } from "./AxiosService.js"
 
 class SearchesService {
   async getSearchResults(search) {
@@ -25,4 +25,4 @@ class SearchesService {
 
 }
 
-export const searchesService = new SearchesService();
+export const searchesService = new SearchesService()
