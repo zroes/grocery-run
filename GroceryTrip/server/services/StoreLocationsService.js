@@ -49,7 +49,7 @@ class StoreLocationsService {
     let distance
     let savedLocations = []
     await dbContext.StoreLocations.deleteMany({ accountId: accountId })
-    for (let i = 0; i < parsedLocations.data.length; i++) {
+    for (let i = 0; i < 2; i++) {
       const element = parsedLocations.data[i]
       distance = getDistance(
         element.geolocation.latitude, element.geolocation.longitude,
