@@ -8,6 +8,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .put('/location', this.addLocations)
   }
 
   async getUserAccount(req, res, next) {
@@ -15,6 +16,18 @@ export class AccountController extends BaseController {
       const account = await accountService.getAccount(req.userInfo)
       res.send(account)
     } catch (error) {
+      next(error)
+    }
+  }
+
+  async addLocations(req, res, next) {
+    try {
+      const accountId = req.userInfo.id
+      const latLong = req.body
+      const locations = await accountService.addLocations(latLong)
+      return res.send(locations)
+    }
+    catch (error) {
       next(error)
     }
   }

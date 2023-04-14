@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 border-success border-bottom border-4">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/Group 13.png" height="40" />
+        <img alt="logo" src="../assets/img/logo2.png" height="45" />
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
