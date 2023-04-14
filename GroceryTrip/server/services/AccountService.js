@@ -74,7 +74,7 @@ class AccountService {
       const element = parsedLocations.data[index];
       distance.push(getDistance(element.geolocation, latLong))
     }
-    return parsedLocations
+    return distance
   }
   // 
   /**
