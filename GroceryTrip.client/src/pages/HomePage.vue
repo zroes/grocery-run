@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <!--NOTE search bar goes here -->
-    <div class="row justify-content-center p-2 mt-1">
+    <div class="row justify-content-center p-2 mt-1" v-if="account.id">
       <!-- STUB Search Bar Component -->
       <SearchBar :sortType="sortType" />
     </div>
@@ -29,6 +29,9 @@ export default {
   setup() {
     return {
       sortType: 'price',
+
+      account: computed(() => AppState.account),
+
     }
   },
   components: { MyLists, SearchBar }

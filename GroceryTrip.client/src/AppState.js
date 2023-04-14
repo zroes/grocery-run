@@ -6,6 +6,9 @@ export const AppState = reactive({
   /** @type {import('./models/Account.js').Account} */
   account: {},
 
+  /** @type {import('./models/SearchResult.js').SearchResult[]|null} */
+  unsortedSearchResults: null,
+
   /** @type {import('./models/SearchResult.js').SearchResult[]} */
   searchResults: [],
 
