@@ -11,4 +11,8 @@ export const AccountSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
-
+AccountSchema.virtual('locations', {
+  localField: '_id',
+  foreignField: 'accountId',
+  ref: 'StoreLocation'
+})
