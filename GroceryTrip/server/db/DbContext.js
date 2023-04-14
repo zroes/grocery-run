@@ -4,7 +4,6 @@ import { ValueSchema } from '../models/Value'
 import { GroceryListsSchema } from "../models/GroceryList.js"
 import { GroceryListItemsSchema } from "../models/GroceryListItem.js"
 import { StoreLocationSchema } from "../models/StoreLocation.js"
-import { TripSchema } from '../models/Trip.js'
 import { TripItemSchema } from '../models/TripItem.js'
 
 class DbContext {
@@ -16,7 +15,6 @@ class DbContext {
 
   StoreLocations = mongoose.model('StoreLocation', StoreLocationSchema);
 
-  Trips = mongoose.model('Trip', TripSchema);
   TripItems = mongoose.model('TripItem', TripItemSchema);
 
 }

@@ -10,6 +10,6 @@ export const TripItemSchema = new Schema({
   distance: { type: Number, required: true, min: 0, max: 10000 },
   store: { type: String, required: true, minLength: 3, maxLength: 100 },
   brand: { type: String, required: true, minLength: 3, maxLength: 100 },
-  tripId: { type: Schema.Types.ObjectId, required: true, ref: 'Trip' },
+  accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
 }, { timestamps: true, toJSON: { virtuals: true } })
 
