@@ -87,6 +87,12 @@ export default {
     const route = useRoute();
 
     watchEffect(() => {
+      AppState.account.id
+      getSearchResults();
+    })
+
+
+    watchEffect(() => {
       route.params
       sortSearchResults();
     })
@@ -98,8 +104,7 @@ export default {
           query: route.params.searchQuery,
           locations: AppState.account.krogerLocations
         }
-        const searchData = await searchesService.getSearchResults(search);
-        return searchData
+        await searchesService.getSearchResults(search);
       } catch (error) {
         logger.error(error.message);
         Pop.error(error.message);
@@ -109,8 +114,7 @@ export default {
 
     async function sortSearchResults() {
       try {
-        const searchData = await getSearchResults();
-        await searchesService.sortSearchResults(searchData, route.params.sortType);
+        await searchesService.sortSearchResults(route.params.sortType);
       } catch (error) {
         logger.error(error.message);
         Pop.error(error.message);

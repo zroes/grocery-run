@@ -7,19 +7,19 @@ class SearchesService {
   async getSearchResults(search) {
     // logger.log(search)
     const res = await api.post('api/search', search)
-    return res.data
-
+    let rawSearchResults = res.data.map(s => new SearchResult(s))
+    AppState.unsortedSearchResults = rawSearchResults.filter(r => r.price != null)
   }
-  async sortSearchResults(searchData, sortType) {
-    let unsortedSearchResults = searchData.map(s => new SearchResult(s))
-    let newUnsortedSearchResults = unsortedSearchResults.filter(r => r.price != null)
+  async sortSearchResults(sortType) {
 
-    if (sortType == 'price') {
-      AppState.searchResults = newUnsortedSearchResults.sort((a, b) => a.price - b.price)
-      // logger.log(AppState.searchResults)
-    } else {
-      AppState.searchResults = newUnsortedSearchResults.sort((a, b) => a.distance - b.distance)
-      // logger.log(AppState.searchResults)
+    if (AppState.unsortedSearchResults) {
+      if (sortType == 'price') {
+        AppState.searchResults = AppState.unsortedSearchResults.sort((a, b) => a.price - b.price)
+        // logger.log(AppState.searchResults)
+      } else {
+        AppState.searchResults = AppState.unsortedSearchResults.sort((a, b) => a.distance - b.distance)
+        // logger.log(AppState.searchResults)
+      }
     }
   }
 
