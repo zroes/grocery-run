@@ -31,7 +31,7 @@ export default {
 
       async search() {
         try {
-          logger.log(`Searching`)
+          // logger.log(`Searching`)
           let query = editable.value.search
           router.push({ name: 'SearchResults', params: { searchQuery: query, sortType: props.sortType } })
         } catch (error) {
