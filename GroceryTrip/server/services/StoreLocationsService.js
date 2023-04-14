@@ -47,6 +47,7 @@ class StoreLocationsService {
         // return locations
         const parsedLocations = JSON.parse(res.data)
         let distance
+        let savedLocations = []
         for (let i = 0; i < parsedLocations.data.length; i++) {
             const element = parsedLocations.data[i]
             distance = getDistance(
@@ -54,9 +55,9 @@ class StoreLocationsService {
                 latLong.lat, latLong.long)
             element.distance = distance
             element.accountId = accountId
-            let savedLocations = await dbContext.StoreLocations.create(element)
+            savedLocations.push(await dbContext.StoreLocations.create(element))
         }
-        return
+        return savedLocations
     }
 
 }
