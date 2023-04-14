@@ -47,34 +47,6 @@ function sanitizeBody(body) {
   return writable
 }
 
-// compute the distance to user for each location id
-// acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
-
-// stack overflow special
-function getDistance(lat1, lon1, lat2, lon2) {
-  const radius = 3963 // mi
-  var dLat = toRad(lat2 - lat1)
-  var dLon = toRad(lon2 - lon1)
-  let lat1Rad = toRad(lat1)
-  let lat2Rad = toRad(lat2)
-
-  let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1Rad) * Math.cos(lat2Rad)
-  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-  let d = radius * c
-  return d.toFixed(2)
-}
-
-// Converts numeric degrees to radians
-function toRad(Value) {
-  return Value * Math.PI / 180
-}
-
-
-// let x = point1.latitude - point2.lat
-// let y = point1.longitude - point2.long
-// return Math.sqrt(x * x + y * y)
-
 
 class AccountService {
 
@@ -90,7 +62,7 @@ class AccountService {
   async getAccount(user) {
     let account = await dbContext.Account.findOne({
       _id: user.id
-    })
+    }).populate('locations')
     account = await createAccountIfNeeded(account, user)
     await mergeSubsIfNeeded(account, user)
     return account
