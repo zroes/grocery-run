@@ -9,7 +9,7 @@ class SearchService {
     // query.queries.forEach(async q => {
     // q = q.replace(/\s+/g, '')
     // res.push(await Kroger.get(`products`, {
-    let resArray = []
+
     let promises = []
     locations.forEach(location => {
       const prom = Kroger.get('products', {
@@ -28,10 +28,12 @@ class SearchService {
       // resArray.push(parsedRes.data)
     })
     const raw = await Promise.all(promises)
-    resArray = raw.map(r => JSON.parse(r.data).data)
+    let resArray = raw.map(r => JSON.parse(r.data).data).flat(1)
     // }))
     // });
-    return resArray
+
+    const mappedArray = resArray.map(item => new SearchItem(item))
+    return mappedArray
   }
 }
 
