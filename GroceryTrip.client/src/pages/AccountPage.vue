@@ -12,7 +12,7 @@ import { computed } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
-import { accountService } from "../services/AccountService.js"
+import { locationsService } from "../services/LocationsService.js"
 
 export default {
   setup() {
@@ -27,7 +27,7 @@ export default {
               lat: crd.latitude,
               long: crd.longitude
             }
-            await accountService.sendLatLong(coords)
+            await locationsService.sendLatLong(coords)
           }
           navigator.geolocation.getCurrentPosition(success)
         } catch (error) {

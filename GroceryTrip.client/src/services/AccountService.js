@@ -14,12 +14,6 @@ class AccountService {
     }
   }
 
-  async sendLatLong(coords) {
-    logger.log(coords)
-    const res = await api.put('/account/location', coords)
-    AppState.locations = res.data.map(l => new StoreLocation(l))
-    logger.log(AppState.locations)
-  }
 }
 
 export const accountService = new AccountService()
