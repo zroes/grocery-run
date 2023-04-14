@@ -12,6 +12,12 @@ export const AppState = reactive({
   /** @type {import('./models/SearchResult.js').SearchResult[]} */
   filteredArray: [],
 
+  /** @type {import('./models/SearchResult.js').tripItem[]} */
+  fredMeyerTripItems: null,
+
+  /** @type {import('./models/SearchResult.js').tripItem[]} */
+  genericTripItems: null,
+
   toggle: false,
   activeGroceryList: null,
   activeGroceryListItems: [],

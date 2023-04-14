@@ -22,7 +22,7 @@
             class="bg-light py-1 px-2 rounded">{{
               r?.quantity }}</span>
         </div>
-        <button class="btn-warning rounded" @click="addToTrip()">Add to Trip</button>
+        <button class="btn-warning rounded" @click="createTripItem(r)" v-if="account.id">Add to Trip</button>
       </div>
     </div>
   </div>
@@ -30,9 +30,12 @@
 
 
 <script lang="ts">
+import { computed } from '@vue/reactivity';
 import { SearchResult } from '../models/SearchResult';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
+import { AppState } from '../AppState';
+import { tripService } from '../services/TripService';
 
 export default {
   props: {
@@ -40,15 +43,19 @@ export default {
   },
   setup(props) {
     return {
-      addToTrip() {
+
+      account: computed(() => AppState.account),
+
+      async createTripItem(selectedSearchResult) {
         try {
-          // logger.log('Adding to Trip')
+          await tripService.createTripItem(selectedSearchResult);
           props.r.quantity++
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);
         }
-      }
+      },
+
     }
   }
 }
