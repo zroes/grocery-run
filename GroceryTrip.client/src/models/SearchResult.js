@@ -9,3 +9,11 @@ export class SearchResult {
     this.image = data.image
   }
 }
+
+export class tripItem extends SearchResult {
+  constructor(data) {
+    super(data)
+    this.id = data.id
+    this.tripId = data.tripId
+  }
+}
