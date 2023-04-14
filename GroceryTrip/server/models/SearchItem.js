@@ -5,7 +5,7 @@ export class SearchItem {
     this.image = this.getImage(data.images)
     this.price = data.items[0].price ? data.items[0].price.regular : null
     this.size = data.items[0].size
-    this.distance = data.distance || null
+    this.locationId = data.locationId
     this.store = data.store
 
   }

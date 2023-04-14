@@ -8,6 +8,7 @@ class SearchesService {
     // logger.log(search)
     const res = await api.post('api/search', search)
     let rawSearchResults = res.data.map(s => new SearchResult(s))
+    logger.log(rawSearchResults)
     AppState.unsortedSearchResults = rawSearchResults.filter(r => r.price != null)
   }
   async sortSearchResults(sortType) {

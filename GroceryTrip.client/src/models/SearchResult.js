@@ -1,3 +1,5 @@
+import { AppState } from "../AppState.js"
+
 export class SearchResult {
   constructor(data) {
     this.name = data.name
@@ -5,7 +7,7 @@ export class SearchResult {
     this.quantity = data.quantity || 0
     this.price = data.price
     this.size = data.size
-    this.distance = data.distance
+    this.distance = AppState.account.krogerLocations.find(l => l.locationId == data.locationId).distance
     this.store = data.store
     this.image = data.image
   }
