@@ -77,31 +77,7 @@ function toRad(Value) {
 
 
 class AccountService {
-  async addLocations(latLong, accountId) {
-    let token = await krogerAuthorizationService.getAuthorization()
 
-    const res = await Kroger.get('locations', {
-      headers:
-        { 'Authorization': `Bearer ${token}` },
-
-      params: {
-        'filter.latLong.near': `${latLong.lat},${latLong.long}`
-      }
-    })
-    // return locations
-    const parsedLocations = JSON.parse(res.data)
-    let distance
-    for (let i = 0; i < parsedLocations.data.length; i++) {
-      const element = parsedLocations.data[i]
-      distance = getDistance(
-        element.geolocation.latitude, element.geolocation.longitude,
-        latLong.lat, latLong.long)
-      parsedLocations.data[i].distance = distance
-      parsedLocations.data[i].accountId = accountId
-
-    }
-    return parsedLocations.data
-  }
   // 
   /**
    * Returns a user account from the Auth0 user object
