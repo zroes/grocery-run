@@ -5,19 +5,21 @@ import { api } from "./AxiosService.js";
 
 class SearchesService {
   async getSearchResults(search) {
-    logger.log(search)
+    // logger.log(search)
     const res = await api.post('api/search', search)
     return res.data
 
   }
   async sortSearchResults(searchData, sortType) {
     let unsortedSearchResults = searchData.map(s => new SearchResult(s))
+    let newUnsortedSearchResults = unsortedSearchResults.filter(r => r.price != null)
+
     if (sortType == 'price') {
-      AppState.searchResults = unsortedSearchResults.sort((a, b) => a.price - b.price)
-      logger.log(AppState.searchResults)
+      AppState.searchResults = newUnsortedSearchResults.sort((a, b) => a.price - b.price)
+      // logger.log(AppState.searchResults)
     } else {
-      AppState.searchResults = unsortedSearchResults.sort((a, b) => a.distance - b.distance)
-      logger.log(AppState.searchResults)
+      AppState.searchResults = newUnsortedSearchResults.sort((a, b) => a.distance - b.distance)
+      // logger.log(AppState.searchResults)
     }
   }
 

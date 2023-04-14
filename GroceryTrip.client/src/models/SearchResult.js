@@ -6,5 +6,6 @@ export class SearchResult {
     this.size = data.size
     this.distance = data.distance
     this.store = data.store
+    this.image = data.image
   }
 }

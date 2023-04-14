@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 border-success border-bottom border-4">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+        <img alt="logo" src="../assets/img/Group 13.png" height="40" />
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,6 +12,11 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
+          <router-link :to="{ name: 'Home' }">
+            <button class="btn btn-success">
+              My Cart <i class="mdi mdi-cart-outline"></i>
+            </button>
+          </router-link>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
