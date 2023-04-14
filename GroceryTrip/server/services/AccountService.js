@@ -67,12 +67,13 @@ class AccountService {
         'filter.latLong.near': `${latLong.lat},${latLong.long}`
       }
     })
-    let distance = []
-    for (let index = 0; index < 2; index++) {
-      const element = locations[index];
-      distance.push(getDistance(element.geolocation, latLong))
-    }
-    return distance
+    return locations
+    // let distance = []
+    // for (let index = 0; index < 2; index++) {
+    //   const element = locations[index];
+    //   distance.push(getDistance(element.geolocation, latLong))
+    // }
+    // return distance
   }
   // 
   /**
