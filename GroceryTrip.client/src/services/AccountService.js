@@ -13,9 +13,9 @@ class AccountService {
     }
   }
 
-  async sendLatLong(latLong) {
-    // logger.log(latLong)
-    const res = await api.put('/account/location', latLong)
+  async sendLatLong(coords) {
+    logger.log(coords)
+    const res = await api.put('/account/location', coords)
     logger.log(res.data)
   }
 }
