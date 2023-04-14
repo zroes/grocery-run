@@ -12,15 +12,18 @@ import { computed } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
+import { accountService } from "../services/AccountService.js"
+
 export default {
   setup() {
     return {
       account: computed(() => AppState.account),
       async promptLocation() {
         try {
-          function success(pos) {
+          async function success(pos) {
             const crd = pos.coords
             logger.log(crd.latitude, crd.longitude)
+            await accountService.sendLatLong(`${crd.latitude},${crd.longitude}`)
           }
           navigator.geolocation.getCurrentPosition(success)
         } catch (error) {

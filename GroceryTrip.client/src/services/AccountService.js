@@ -12,6 +12,12 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+
+  async sendLatLong(latLong) {
+    // logger.log(latLong)
+    const res = await api.put('/account/location', latLong)
+    logger.log(res.data)
+  }
 }
 
 export const accountService = new AccountService()
