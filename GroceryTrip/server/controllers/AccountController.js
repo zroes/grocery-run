@@ -24,7 +24,7 @@ export class AccountController extends BaseController {
     try {
       const accountId = req.userInfo.id
       const latLong = req.body
-      const locations = await accountService.addLocations(latLong)
+      const locations = await accountService.addLocations(latLong, accountId)
       return res.send(locations)
     }
     catch (error) {
