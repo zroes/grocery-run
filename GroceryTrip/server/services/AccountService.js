@@ -69,12 +69,12 @@ class AccountService {
     })
     // return locations
     const parsedLocations = JSON.parse(res.data)
-    let distance = []
-    for (let index = 0; index < 2; index++) {
-      const element = parsedLocations[index];
-      distance.push(getDistance(element.geolocation, latLong))
-    }
-    return distance
+    // let distance = []
+    // for (let index = 0; index < 2; index++) {
+    //   const element = parsedLocations[index];
+    //   distance.push(getDistance(element.geolocation, latLong))
+    // }
+    return parsedLocations
   }
   // 
   /**
