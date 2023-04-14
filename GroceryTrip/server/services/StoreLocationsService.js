@@ -2,6 +2,7 @@
 // compute the distance to user for each location id
 // acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
 
+import { dbContext } from "../db/DbContext.js"
 import { Kroger } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
@@ -51,11 +52,11 @@ class StoreLocationsService {
             distance = getDistance(
                 element.geolocation.latitude, element.geolocation.longitude,
                 latLong.lat, latLong.long)
-            parsedLocations.data[i].distance = distance
-            parsedLocations.data[i].accountId = accountId
-
+            element.distance = distance
+            element.accountId = accountId
+            let savedLocations = await dbContext.StoreLocations.create(element)
         }
-        return parsedLocations.data
+        return
     }
 
 }
