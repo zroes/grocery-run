@@ -9,7 +9,7 @@ class KrogerAuthorizationService {
         const token = JSON.parse(res.data)
         return token.access_token
     }
-    // TODO send token back
+    // TODO refactor to cache token for 25 mins
 }
 
 

@@ -1,4 +1,6 @@
 import { dbContext } from '../db/DbContext'
+import { Kroger } from './AxiosService.js'
+import { krogerAuthorizationService } from './KrogerAuthorizationService.js'
 
 // Private Methods
 
@@ -10,7 +12,7 @@ import { dbContext } from '../db/DbContext'
 async function createAccountIfNeeded(account, user) {
   if (!account) {
     user._id = user.id
-    if(typeof user.name == 'string' && user.name.includes('@')){
+    if (typeof user.name == 'string' && user.name.includes('@')) {
       user.name = user.nickname
     }
     account = await dbContext.Account.create({
@@ -45,7 +47,34 @@ function sanitizeBody(body) {
   return writable
 }
 
+// compute the distance to user for each location id
+
+function getDistance(point1, point2) {
+  let x = point1.latitude - point2.lat
+  let y = point1.longitude - point2.long
+  return Math.sqrt(x * x + y * y)
+}
+
 class AccountService {
+  async addLocations(latLong) {
+    let token = await krogerAuthorizationService.getAuthorization()
+
+    const locations = await Kroger.get('locations', {
+      headers:
+        { 'Authorization': `Bearer ${token}` },
+
+      params: {
+        'filter.latLong.near': `${latLong.lat},${latLong.long}`
+      }
+    })
+    let distance = []
+    for (let index = 0; index < 2; index++) {
+      const element = locations[index];
+      distance.push(getDistance(element.geolocation, latLong))
+    }
+    return distance
+  }
+  // 
   /**
    * Returns a user account from the Auth0 user object
    *
