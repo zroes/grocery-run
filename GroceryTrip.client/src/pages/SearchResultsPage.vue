@@ -91,6 +91,7 @@ export default {
       sortSearchResults();
     })
 
+
     async function getSearchResults() {
       try {
         const search = {
