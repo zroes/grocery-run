@@ -1,6 +1,5 @@
 export class SearchResult {
   constructor(data) {
-    this.id = data.id
     this.name = data.name
     this.quantity = data.quantity || 0
     this.price = data.price
