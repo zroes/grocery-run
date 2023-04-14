@@ -24,6 +24,8 @@
 <script>
 import MyLists from "../components/MyLists.vue"
 import SearchBar from "../components/SearchBar.vue"
+import { computed } from "@vue/reactivity"
+import { AppState } from "../AppState.js"
 
 export default {
   setup() {
