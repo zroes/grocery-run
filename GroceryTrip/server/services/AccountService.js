@@ -48,11 +48,14 @@ function sanitizeBody(body) {
 }
 
 // compute the distance to user for each location id
+// acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
+function getDistance(lat1, long1, lat2, long2) {
+  return Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(long2 - long1)) * 3963.19
 
-function getDistance(point1, point2) {
-  let x = point1.latitude - point2.lat
-  let y = point1.longitude - point2.long
-  return Math.sqrt(x * x + y * y)
+
+  // let x = point1.latitude - point2.lat
+  // let y = point1.longitude - point2.long
+  // return Math.sqrt(x * x + y * y)
 }
 
 class AccountService {
@@ -71,8 +74,10 @@ class AccountService {
     const parsedLocations = JSON.parse(res.data)
     let distance = []
     for (let index = 0; index < 2; index++) {
-      const element = parsedLocations.data[index];
-      distance.push(getDistance(element.geolocation, latLong))
+      const element = parsedLocations.data[index]
+      distance.push(
+        getDistance(element.geolocation.latitude, element.geolocation.longitude,
+          latLong.lat, latLong.long))
     }
     return distance
   }
