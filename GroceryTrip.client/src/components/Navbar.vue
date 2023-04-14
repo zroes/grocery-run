@@ -27,9 +27,9 @@
 
 <script>
 import Login from './Login.vue'
+
 export default {
   setup() {
-    return {}
   },
   components: { Login }
 }
