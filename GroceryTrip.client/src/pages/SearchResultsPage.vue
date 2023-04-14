@@ -87,8 +87,9 @@ export default {
     const route = useRoute();
 
     watchEffect(() => {
-      AppState.account.id
-      getSearchResults();
+      if (AppState.account.id) {
+        getSearchResults();
+      }
     })
 
 
