@@ -49,14 +49,32 @@ function sanitizeBody(body) {
 
 // compute the distance to user for each location id
 // acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
-function getDistance(lat1, long1, lat2, long2) {
-  return Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(long2 - long1)) * 3963.19
 
+// stack overflow special
+function getDistance(lat1, lon1, lat2, lon2) {
+  const radius = 3963 // mi
+  var dLat = toRad(lat2 - lat1)
+  var dLon = toRad(lon2 - lon1)
+  let lat1Rad = toRad(lat1)
+  let lat2Rad = toRad(lat2)
 
-  // let x = point1.latitude - point2.lat
-  // let y = point1.longitude - point2.long
-  // return Math.sqrt(x * x + y * y)
+  let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1Rad) * Math.cos(lat2Rad)
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  let d = radius * c
+  return d.toFixed(2)
 }
+
+// Converts numeric degrees to radians
+function toRad(Value) {
+  return Value * Math.PI / 180
+}
+
+
+// let x = point1.latitude - point2.lat
+// let y = point1.longitude - point2.long
+// return Math.sqrt(x * x + y * y)
+
 
 class AccountService {
   async addLocations(latLong) {
@@ -72,14 +90,14 @@ class AccountService {
     })
     // return locations
     const parsedLocations = JSON.parse(res.data)
-    let distance = []
-    for (let index = 0; index < 2; index++) {
+    let distances = []
+    for (let index = 0; index < 5; index++) {
       const element = parsedLocations.data[index]
-      distance.push(
+      distances.push(
         getDistance(element.geolocation.latitude, element.geolocation.longitude,
           latLong.lat, latLong.long))
     }
-    return distance
+    return distances
   }
   // 
   /**
