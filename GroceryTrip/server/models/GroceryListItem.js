@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 const Schema = mongoose.Schema
 
-export const GroceryListItemsScema = new Schema(
+export const GroceryListItemsSchema = new Schema(
   {
     listId: { type: Schema.Types.ObjectId, required: true },
     name: { type: String, required: true, minLength: 3, maxLength: 50 },

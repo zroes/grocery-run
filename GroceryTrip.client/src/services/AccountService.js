@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { Account } from '../models/Account.js'
+import { StoreLocation } from "../models/StoreLocation.js"
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -13,11 +14,6 @@ class AccountService {
     }
   }
 
-  async sendLatLong(coords) {
-    logger.log(coords)
-    const res = await api.put('/account/location', coords)
-    logger.log(res.data)
-  }
 }
 
 export const accountService = new AccountService()

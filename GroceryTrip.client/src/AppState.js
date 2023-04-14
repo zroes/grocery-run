@@ -22,5 +22,6 @@ export const AppState = reactive({
   activeGroceryList: null,
   activeGroceryListItems: [],
   groceryLists: [],
+  locations: null,
 
 })
