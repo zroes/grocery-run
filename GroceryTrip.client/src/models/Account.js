@@ -4,7 +4,7 @@ export class Account {
     this.email = data.email
     this.name = data.name
     this.picture = data.picture
-    this.location = data.location || null
+    this.krogerLocations = data.krogerLocations
     // TODO add additional properties if needed
   }
 }
