@@ -12,20 +12,22 @@ class SearchService {
 
     let promises = []
     locations.forEach(location => {
-      const prom =
-        Kroger.get('products', {
-          headers:
-          {
-            'Authorization': `Bearer ${token}`
-          },
-          params:
-          {
-            'filter.locationId': location.locationId,
-            // 'filter.term': q
-            'filter.term': query,
-            // 'filter.limit': '1'
-          }
-        })
+      // const prom = {}
+      // prom.locationId = location.locationId
+      // prom.res 
+      const prom = Kroger.get('products', {
+        headers:
+        {
+          'Authorization': `Bearer ${token}`
+        },
+        params:
+        {
+          'filter.locationId': location.locationId,
+          // 'filter.term': q
+          'filter.term': query,
+          // 'filter.limit': '1'
+        }
+      })
 
       // const parsedRes = JSON.parse(res.data)
 
@@ -33,7 +35,9 @@ class SearchService {
       // resArray.push(parsedRes.data)
     })
     const raw = await Promise.all(promises)
+    // let resArray = raw.res.map(r => JSON.parse(r.data).data).flat(1)
     let resArray = raw.map(r => JSON.parse(r.data).data).flat(1)
+
     // TODO don't do this
     const len = resArray.length
     for (let i = 0; i < len; i++) {
