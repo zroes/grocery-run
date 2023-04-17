@@ -8,6 +8,7 @@ export class GroceryListItemsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.addItem)
       .delete('/:itemId', this.deleteItem)
+      .put('/:itemId', this.toggleInclude)
   }
   async addItem(req, res, next) {
     try {
@@ -23,8 +24,20 @@ export class GroceryListItemsController extends BaseController {
   async deleteItem(req, res, next) {
     try {
       const itemId = req.params.itemId
+      // Ensure req userinfo id is correct
       await groceryListItemsService.deleteItem(itemId)
       res.send('item deleted')
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async toggleInclude(req, res, next) {
+    try {
+      const itemId = req.params.itemId
+      // const accountId = req.userInfo.id
+      const itemToToggle = await groceryListItemsService.toggleInclude(itemId)
+      res.send(itemToToggle)
     } catch (error) {
       next(error)
     }

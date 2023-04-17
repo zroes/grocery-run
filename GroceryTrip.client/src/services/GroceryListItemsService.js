@@ -23,6 +23,13 @@ class GroceryListsItemsService {
     AppState.activeGroceryListItems = res.data
   }
 
+  async toggleInclude(itemId) {
+    const res = await api.put('api/groceryItems/' + itemId)
+    logger.log(res.data)
+    const itemToToggle = AppState.activeGroceryListItems.find(item => item.id == itemId)
+    itemToToggle.included = !itemToToggle.included
+  }
+
 }
 
 export const groceryListItemsService = new GroceryListsItemsService()

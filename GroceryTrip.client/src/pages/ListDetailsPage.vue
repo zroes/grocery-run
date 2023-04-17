@@ -1,18 +1,21 @@
 <template>
   <h1 class="bigger p-3 text-light">{{ groceryList?.name }}</h1>
   <ul class="container-fluid">
-    <div v-for="(item, index) in groceryListItems" class="row p-2 selectable justify-content-between"
-      :class="{ 'bg-grey': index % 2 == 0 }">
+    <div v-for="(item, index) in groceryListItems" class="row p-2 justify-content-between"
+      :class="{ 'bg-grey': index % 2 == 0 }" @click="toggleInclude(item.id)">
+      <div class="filler"></div>
       <li class="text-light d-flex">
         <h5 class="my-3 col-8">•{{ item.name }}</h5>
         <div class="text-end my-2 col">
-          <button @click="deleteItem(item.id)" class="btn text-danger btn-dark" title="Remove Item"> <!--:class="{
+          <button @click.stop="deleteItem(item.id)" class="btn text-danger btn-dark" title="Remove Item"> <!--:class="{
             'btn-secondary': index % 2 == 0,
             'btn-grey': index % 2 == 1
           }"-->
             <i class="mdi mdi-delete-outline"></i></button>
         </div>
       </li>
+      <div v-if="!item.included" class="excluded bg-dark"></div>
+      <div v-else class="filler"></div>
     </div>
     <div v-if="toggle" class="">
       <form class="row m-2" @submit.prevent="addItem">
@@ -28,6 +31,12 @@
     <button v-if="!toggle" @click="switchToggle" class="my-3 btn btn-dark"><i class="mdi mdi-note-plus-outline"> Add
         Item</i></button>
   </ul>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <button @click="deleteList" class="btn btn-danger col-4">Delete List</button>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +47,7 @@ import Pop from "../utils/Pop.js"
 import { listsService } from "../services/ListsService.js"
 import { groceryListItemsService } from "../services/GroceryListItemsService.js"
 import { useRoute } from "vue-router"
+import { router } from "../router.js"
 export default {
   setup() {
     // private variables and methods here
@@ -105,6 +115,27 @@ export default {
           logger.error(error)
           Pop.error(error.message)
         }
+      },
+
+      async deleteList() {
+        if (await Pop.confirm("Are you sure you want to delete this list?")) {
+          try {
+            await listsService.deleteList(route.params.listId)
+            router.push('/')
+          } catch (error) {
+            logger.error(error)
+            Pop.error(error.message)
+          }
+        }
+      },
+
+      async toggleInclude(itemId) {
+        try {
+          await groceryListItemsService.toggleInclude(itemId)
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
       }
       // public variables and methods here
     }
@@ -118,6 +149,18 @@ export default {
   transition: all 0.2s ease-in-out;
   /* background-color: #dc3545;
   color: #f7f5f5; */
+}
+
+.excluded {
+  height: 5px;
+  /* opacity: 0; */
+  border-radius: 1em;
+  position: relative;
+  bottom: 30px;
+}
+
+.filler {
+  height: 5px;
 }
 
 .parent:hover .child {
