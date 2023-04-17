@@ -1,6 +1,7 @@
 import { dbContext } from '../db/DbContext'
 import { Kroger } from './AxiosService.js'
 import { krogerAuthorizationService } from './KrogerAuthorizationService.js'
+import { BadRequest } from "../utils/Errors.js"
 
 // Private Methods
 
@@ -66,6 +67,16 @@ class AccountService {
     account = await createAccountIfNeeded(account, user)
     await mergeSubsIfNeeded(account, user)
     return account
+  }
+
+  async getAllTripItems(accountId) {
+    const tripItems = await dbContext.TripItems.find({ accountId });
+
+    if (tripItems == null) {
+      throw new BadRequest("This Account does not have any TripItems")
+    }
+
+    return tripItems
   }
 
   /**
