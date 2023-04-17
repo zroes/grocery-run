@@ -8,6 +8,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .get(`/:accountId/tripItems`, this.getAllTripItems)
   }
 
   async getUserAccount(req, res, next) {
@@ -19,5 +20,13 @@ export class AccountController extends BaseController {
     }
   }
 
-
+  async getAllTripItems(req, res, next) {
+    try {
+      const accountId = req.userInfo.id
+      const tripItems = await accountService.getAllTripItems(accountId)
+      return res.send(tripItems)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
