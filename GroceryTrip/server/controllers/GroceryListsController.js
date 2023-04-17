@@ -11,6 +11,7 @@ export class GroceryListsController extends BaseController {
       .get('', this.getAll)
       .get('/:listId', this.getOne)
       .get('/:listId/items', this.getAllItems)
+      .delete('/:listId', this.deleteList)
   }
   async create(req, res, next) {
     try {
@@ -48,6 +49,18 @@ export class GroceryListsController extends BaseController {
       const listId = req.params.listId
       const groceryItems = await groceryListItemsService.getAllItems(listId)
       res.send(groceryItems)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async deleteList(req, res, next) {
+    try {
+      const listId = req.params.listId
+      // confirm that the creator of the list is the one sending this request
+      const accountId = req.userInfo.id
+      await groceryListsService.delete(listId, accountId)
+      res.send('list was deleted')
     } catch (error) {
       next(error)
     }

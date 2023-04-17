@@ -25,6 +25,12 @@ class ListsService {
   toggleForm() {
     AppState.toggle = !AppState.toggle
   }
+
+  async deleteList(listId) {
+    const res = await api.delete('api/lists/' + listId)
+    logger.log(res.data)
+  }
+
 }
 
 export const listsService = new ListsService()
