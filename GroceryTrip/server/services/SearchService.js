@@ -12,9 +12,7 @@ class SearchService {
 
     let promises = []
     locations.forEach(location => {
-      // const prom = {}
-      // prom.locationId = location.locationId
-      // prom.res 
+      // const res = 
       const prom = Kroger.get('products', {
         headers:
         {
@@ -35,24 +33,27 @@ class SearchService {
       // resArray.push(parsedRes.data)
     })
     const raw = await Promise.all(promises)
-    // let resArray = raw.res.map(r => JSON.parse(r.data).data).flat(1)
-    let resArray = raw.map(r => JSON.parse(r.data).data).flat(1)
+    let resArray = raw.map(r => JSON.parse(r.prom.data).data).flat(1)
+    // let resArray = raw.map(r => JSON.parse(r.data).data).flat(1)
 
     // TODO don't do this
-    const len = resArray.length
-    for (let i = 0; i < len; i++) {
-      if (i < len / 2)
-        resArray[i].locationId = locations[0].locationId
-      else
-        resArray[i].locationId = locations[1].locationId
+    // const len = resArray.length
+    // for (let i = 0; i < len; i++) {
+    //   if (i < len / 2)
+    //     resArray[i].locationId = locations[0].locationId
+    //   else
+    //     resArray[i].locationId = locations[1].locationId
 
-      resArray[i].store = "FRED MEYER"
-    }
+    //   resArray[i].store = "FRED MEYER"
+    // }
 
     // }))
     // });
 
-    const mappedArray = resArray.map(item => new SearchItem(item))
+
+
+    // let mappedArray
+    const mappedArray = resArray.map(item => { new SearchItem(item.prom); item.locationId })
     return mappedArray
   }
 }
