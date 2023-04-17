@@ -16,10 +16,10 @@ export const AppState = reactive({
   filteredArray: [],
 
   /** @type {import('./models/SearchResult.js').tripItem[]} */
-  fredMeyerTripItems: null,
+  fredMeyerTripItems: [],
 
   /** @type {import('./models/SearchResult.js').tripItem[]} */
-  genericTripItems: null,
+  genericTripItems: [],
 
   toggle: false,
   activeGroceryList: null,
