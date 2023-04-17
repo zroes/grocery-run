@@ -23,15 +23,18 @@
         <button class="btn btn-primary col-2">Add</button>
       </form>
       <div class="text-center">
-        <button @click="switchToggle" class="col-3 btn btn-grey text-warning">Cancel</button>
+        <button @click="switchToggle" class="col-3 btn border-warning text-warning">Cancel</button>
       </div>
     </div>
     <button v-if="!toggle" @click="switchToggle" class="my-3 btn btn-dark"><i class="mdi mdi-note-plus-outline"> Add
         Item</i></button>
   </ul>
   <div class="container-fluid">
-    <div class="row justify-content-center mb-3">
-      <button @click="deleteList" class="btn btn-danger col-4">Delete List</button>
+    <div class="row">
+    </div>
+    <div class="row justify-content-evenly my-3">
+      <button @click="deleteList" class="btn btn-secondary border-danger text-danger col-4">Delete List</button>
+      <button @click="addListToTrip" class="col-5 btn btn-primary py-2">Add List to Trip</button>
 
     </div>
   </div>
@@ -130,6 +133,19 @@ export default {
       async toggleInclude(itemId) {
         try {
           await groceryListItemsService.toggleInclude(itemId)
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      },
+
+      async addListToTrip() {
+        try {
+          const itemsToSend = []
+          AppState.activeGroceryListItems.forEach(item => {
+            itemsToSend.push(item.name)
+          })
+          await groceryListItemsService.addListToTrip(itemsToSend)
         } catch (error) {
           logger.error(error)
           Pop.error(error.message)
