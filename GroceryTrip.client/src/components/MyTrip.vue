@@ -1,7 +1,9 @@
 <template>
   <h4>My Trip</h4>
   <div class="d-flex justify-content-between mb-3">
-    <img class="logo" src="../assets/img/fredmeyer logo.png" alt="Fred Meyer">
+    <div class="col-5 my-2">
+      <img class="logo" src="../assets/img/fredmeyer logo.png" alt="Fred Meyer">
+    </div>
     <h4 class="my-2">{{ fredItems[0]?.distance }} miles</h4>
     <h4 class="my-2"> ${{ fredPrice.toFixed(2) }}</h4>
   </div>
@@ -10,13 +12,11 @@
       <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
     </div>
     <div class="col-9">
-      <h5 :title="item?.name">{{ item?.name.length <= 35 ? item?.name : item?.name.slice(0, 35) + '...' }}</h5>
+      <h5 :title="item?.name">{{ item?.name.length <= 25 ? item?.name : item?.name.slice(0, 25) + '...' }} </h5>
           <div class="d-flex justify-content-between">
 
             <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
-          </div>
-          <div class="d-flex justify-content-end">
-            <h6 class="d-flex align-items-center m-0">{{ item?.size }}</h6>
+            <h6 class="">{{ item?.size }}</h6>
           </div>
     </div>
 
@@ -64,7 +64,8 @@ export default {
 }
 
 .logo {
-  width: 40%;
+  width: 100%;
+  height: auto;
   filter: drop-shadow(0 2px 5px #2d2b37);
 }
 </style>
