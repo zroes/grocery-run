@@ -13,7 +13,6 @@ class TripService {
       AppState.genericTripItems.push(new tripItem(res.data))
     }
   }
-
 }
 
 export const tripService = new TripService();

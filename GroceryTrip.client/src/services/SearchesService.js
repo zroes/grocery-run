@@ -24,6 +24,11 @@ class SearchesService {
     }
   }
 
+  async searchList(body) {
+    const res = await api.post('api/search/trips', body)
+    return res.data
+  }
+
 }
 
 export const searchesService = new SearchesService()

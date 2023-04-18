@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { computed, watchEffect, ref, onMounted } from "vue"
+import { computed, watchEffect, ref, onMounted, popScopeId } from "vue"
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
@@ -147,7 +147,12 @@ export default {
           })
           const locations = AppState.account.krogerLocations
           const body = { query: itemsToSend, locations: locations }
-          await groceryListItemsService.addListToTrip(body)
+
+          const sortType = await Pop.filterButtons
+
+          if (sortType) {
+            await groceryListItemsService.sortListResults(body, sortType)
+          }
         } catch (error) {
           logger.error(error)
           Pop.error(error.message)
