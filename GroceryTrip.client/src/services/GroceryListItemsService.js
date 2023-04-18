@@ -31,7 +31,7 @@ class GroceryListsItemsService {
   }
 
   async addListToTrip(body) {
-    const res = await api.post('api/search/test', body)
+    const res = await api.post('api/search/trips', body)
     logger.log(res.data)
   }
 }

@@ -1,7 +1,7 @@
 import { query } from "express"
 import { SearchItem } from "../models/SearchItem.js"
 import { searchService } from "../services/SearchService.js"
-import { testingSearchService } from "../services/TestSearchService.js"
+import { listSearchService } from "../services/ListSearchService.js"
 import BaseController from "../utils/BaseController.js"
 
 export class SearchController extends BaseController {
@@ -9,7 +9,7 @@ export class SearchController extends BaseController {
     super('api/search')
     this.router
       .post('', this.getKrogerSearch)
-      .post('/test', this.manySearchTest)
+      .post('/trips', this.manySearch)
   }
   async getKrogerSearch(req, res, next) {
     try {
@@ -24,11 +24,11 @@ export class SearchController extends BaseController {
     }
   }
 
-  async manySearchTest(req, res, next) {
+  async manySearch(req, res, next) {
     try {
       const query = req.body.query
       const locations = req.body.locations
-      const results = await testingSearchService.testSearch(query, locations)
+      const results = await listSearchService.getItemsFromListForTrip(query, locations)
 
       return res.send(results)
     }

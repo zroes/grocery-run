@@ -2,8 +2,8 @@ import { SearchItem } from "../models/SearchItem.js"
 import { Kroger } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
-class TestingSearchService {
-  async testSearch(query, locations) {
+class ListSearchService {
+  async getItemsFromListForTrip(query, locations) {
     let token = await krogerAuthorizationService.getAuthorization()
 
     let promises0 = []
@@ -86,51 +86,7 @@ class TestingSearchService {
     return obj
   }
 
-
-
-  async promiseTest(query, locations) {
-    let token = await krogerAuthorizationService.getAuthorization()
-    let promise = new Promise(function (resolve, reject) {
-      fetch(`https://api-ce.kroger.com/v1/products?filter.term=${query}&filter.locationId=${locations[0].locationId}`, {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${token}`
-
-        },
-
-
-      })
-      resolve({ data: promise, locationId: locations[0].locationId })
-      reject(new Error('promise failed'))
-    })
-    promise.then(
-      function (value) { }
-    )
-  }
-
-
-
-  async promiseTest(query, locations) {
-    let token = await krogerAuthorizationService.getAuthorization()
-    let promise = new Promise(function (resolve, reject) {
-      fetch(`https://api-ce.kroger.com/v1/products?filter.term=${query}&filter.locationId=${locations[0].locationId}`, {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${token}`
-
-        },
-
-
-      })
-      resolve({ data: promise, locationId: locations[0].locationId })
-      reject(new Error('promise failed'))
-    })
-    promise.then(
-      function (value) { }
-    )
-  }
-
 }
 
 
-export const testingSearchService = new TestingSearchService()
+export const listSearchService = new ListSearchService()

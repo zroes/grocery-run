@@ -146,7 +146,7 @@ export default {
             itemsToSend.push(item.name)
           })
           const locations = AppState.account.krogerLocations
-          const body = { query: itemsToSend, locations, locations }
+          const body = { query: itemsToSend, locations: locations }
           await groceryListItemsService.addListToTrip(body)
         } catch (error) {
           logger.error(error)
