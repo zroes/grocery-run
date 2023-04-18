@@ -1,3 +1,4 @@
+import { SearchItem } from "../models/SearchItem.js"
 import { Kroger } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
@@ -5,8 +6,8 @@ class TestingSearchService {
     async testSearch(query, locations) {
         let token = await krogerAuthorizationService.getAuthorization()
 
-        let promises = []
-        let res = []
+        let promises0 = []
+        let resArray = []
         query.forEach(q => {
             const prom = Kroger.get('products', {
                 headers:
@@ -21,13 +22,54 @@ class TestingSearchService {
                     // 'filter.limit': '1'
                 }
             })
+            promises0.push(prom)
+            // promises.push(new Promise((resolve,reject)=> {
+            //     const prom = 
+            //     resolve();
 
-            promises.push(prom)
+            // }))
         })
-        const raw = await Promise.all(promises)
-        const parsedRes = raw.map(r => JSON.parse(r.data))
+        const raw0 = await Promise.all(promises0)
+        const parsedRes0 = raw0.map(r => JSON.parse(r.data).data).flat(1)
+        // parsedRes0.flat(1)
 
-        return parsedRes
+        for (let i = 0; i < parsedRes0.length; i++) {
+            let item = parsedRes0[i]
+            item.locationId = locations[0].locationId
+            item.store = "FRED MEYER"
+            resArray.push(new SearchItem(item))
+        }
+        // const parsedRes = raw.map(r => JSON.parse(r.results))
+        // const test = 'hold please'
+
+        let promises1 = []
+        query.forEach(q => {
+            const prom = Kroger.get('products', {
+                headers:
+                {
+                    'Authorization': `Bearer ${token}`
+                },
+                params:
+                {
+                    'filter.locationId': locations[1].locationId,
+                    'filter.term': q,
+                }
+            })
+            promises1.push(prom)
+        })
+
+        const raw1 = await Promise.all(promises1)
+
+        const parsedRes1 = raw1.map(r => JSON.parse(r.data).data).flat(1)
+        for (let i = 0; i < parsedRes0.length; i++) {
+            let item = parsedRes1[i]
+            item.locationId = locations[1].locationId
+            item.store = "FRED MEYER"
+            resArray.push(new SearchItem(item))
+        }
+
+
+        return resArray
     }
 
 }
