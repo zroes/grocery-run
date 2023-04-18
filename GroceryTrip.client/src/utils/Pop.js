@@ -38,9 +38,10 @@ export default class Pop {
     try {
       const res = await Swal.fire({
         title: "",
+        icon: "question",
         text: "How do you want your groceries picked?",
-        showDenyButton: true,
         showCancelButton: true,
+        showDenyButton: true,
         confirmButtonText: "pick cheapest",
         denyButtonText: "pick closest",
 
