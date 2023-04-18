@@ -30,8 +30,8 @@ class GroceryListsItemsService {
     logger.log(res.data)
   }
 
-  async addListToTrip(queries) {
-    const res = await api.post('', queries)
+  async addListToTrip(body) {
+    const res = await api.post('api/search', body)
     logger.log(res.data)
   }
 }
