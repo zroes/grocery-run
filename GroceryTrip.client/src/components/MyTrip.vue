@@ -6,9 +6,18 @@
         <img class="logo" :src="location?.logo" alt="Fred Meyer">
       </div>
       <h4 class="my-2">{{ location?.distance }} miles</h4>
-      <h4 class="my-2"> ${{ fredPrice.toFixed(2) }}</h4>
+      <h4 class="my-2"> ${{ Price0?.toFixed(2) }}</h4>
     </div>
-    <div class="row my-2" v-for="item in fredItems">
+
+    <!-- <div class="row my-2" v-for="item in Items0" v-if="location == " laction#1">
+      ***Item Component Here***
+    </div>
+    <div class="row my-2" v-for="item in Items1" v-if="location == " laction#1">
+      ***Item Component Here***
+    </div> -->
+
+
+    <div class="row my-2" v-for="item in Items0">
       <!-- NOTE use <TripItem /> component -->
       <div class="col-3 d-flex align-items-center justify-content-center p-0 bg-white rounded elevation-3">
         <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
@@ -48,10 +57,17 @@ export default {
       getMyTripItems()
     })
     return {
-      fredItems: computed(() => AppState.fredMeyerTripItems),
-      fredPrice: computed(() => {
+      // NOTE This will need Refactoring
+      Items0: computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId)),
+      Price0: computed(() => {
         let price = 0
-        AppState.fredMeyerTripItems.forEach(item => price += item.price * item.quantity)
+        AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId).forEach(item => price += item.price * item.quantity)
+        return price
+      }),
+      Items1: computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[1].locationId)),
+      Price1: computed(() => {
+        let price = 0
+        AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[1].locationId).forEach(item => price += item.price * item.quantity)
         return price
       }),
       locations: computed(() => AppState.account.krogerLocations)
