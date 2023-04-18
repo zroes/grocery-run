@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style scpoped>
+<style scoped>
 .itemPic {
   max-width: 24vw;
   height: 12vh;
