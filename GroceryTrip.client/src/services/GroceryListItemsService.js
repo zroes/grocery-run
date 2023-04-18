@@ -41,11 +41,13 @@ class GroceryListsItemsService {
 
     for (let i = 0; i < resultKeys.length; i++) {
 
+      let unsortedResults = results[resultKeys[i]].filter(r => r.price != null)
+
       if (sortType == "price") {
-        const sortedResults = results[resultKeys[i]].sort((a, b) => a.price - b.price)
+        const sortedResults = unsortedResults.sort((a, b) => a.price - b.price)
         pickedItems.push(sortedResults[0])
       } else {
-        const sortedResults = results[resultKeys[i]].sort((a, b) => a.distance - b.distance)
+        const sortedResults = unsortedResults.sort((a, b) => a.distance - b.distance)
         pickedItems.push(sortedResults[0])
       }
     }
