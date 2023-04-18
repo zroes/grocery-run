@@ -1,6 +1,7 @@
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
+import { searchesService } from "./SearchesService.js"
 class GroceryListsItemsService {
 
 
@@ -30,9 +31,24 @@ class GroceryListsItemsService {
     logger.log(res.data)
   }
 
-  async addListToTrip(body) {
-    const res = await api.post('api/search/trips', body)
-    logger.log(res.data)
+  async sortListResults(body, sortType) {
+    const results = await searchesService.searchList(body)
+
+    let pickedItems = []
+
+    let resultKeys = keys(results)
+
+    for (let i = 0; i < resultKeys.length; i++) {
+
+      if (sortType == "price") {
+        const sortedResults = results[resultKeys[i]].sort((a, b) => a.price - b.price)
+        pickedItems.push(sortedResults[0])
+      } else {
+        const sortedResults = results[resultKeys[i]].sort((a, b) => a.distance - b.distance)
+        pickedItems.push(sortedResults[0])
+      }
+    }
+
   }
 }
 
