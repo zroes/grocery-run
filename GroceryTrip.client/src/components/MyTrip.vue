@@ -8,7 +8,7 @@
     <h4 class="my-2"> ${{ fredPrice.toFixed(2) }}</h4>
   </div>
   <div class="row my-2" v-for="item in fredItems">
-    <div class="col-3 d-flex align-items-center justify-content-center p-0">
+    <div class="col-3 d-flex align-items-center justify-content-center p-0 bg-white rounded elevation-3">
       <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
     </div>
     <div class="col-9">
@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style>
+<style scpoped>
 .itemPic {
   max-width: 24vw;
   height: 12vh;
