@@ -6,12 +6,12 @@ import { api } from "./AxiosService.js"
 class TripService {
   async createTripItem(selectedSearchResult) {
     const res = await api.post(`api/tripItems`, selectedSearchResult)
-    logger.log(res.data)
-    if (selectedSearchResult.store?.includes('FRED MEYER')) {
-      AppState.fredMeyerTripItems.push(new tripItem(res.data))
-    } else {
-      AppState.genericTripItems.push(new tripItem(res.data))
-    }
+    // logger.log(res.data)
+    // if (selectedSearchResult.store?.includes('FRED MEYER')) {
+    //   AppState.fredMeyerTripItems.push(new tripItem(res.data))
+    // } else {
+    //   AppState.genericTripItems.push(new tripItem(res.data))
+    // }
   }
 
   async getMyTripItems() {
@@ -19,7 +19,13 @@ class TripService {
     logger.log('Getting trip items', res.data)
     AppState.fredMeyerTripItems = res.data.map(item => new tripItem(item))
   }
-
+  async addListToTrip(pickedItems) {
+    pickedItems.forEach(async p => {
+      const res = await api.post(`api/tripItems`, p)
+      AppState.fredMeyerTripItems.push(new tripItem(res.data))
+    });
+  }
 }
+
 
 export const tripService = new TripService()
