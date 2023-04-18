@@ -30,14 +30,18 @@ class SearchService {
       // }))
     })
     const raw0 = await Promise.all(promises0)
-    const parsedRes0 = raw0.map(r => JSON.parse(r.data).data).flat(1)
+    const parsedRes0 = raw0.map(r => JSON.parse(r.data).data)
     // parsedRes0.flat(1)
-
     for (let i = 0; i < parsedRes0.length; i++) {
-      let item = parsedRes0[i]
-      item.locationId = locations[0].locationId
-      item.store = "FRED MEYER"
-      resArray.push(new SearchItem(item))
+
+      for (let j = 0; j < parsedRes0[i].length; j++) {
+
+        let item = parsedRes0[i][j]
+        item.locationId = locations[0].locationId
+        item.store = "FRED MEYER"
+        resArray.push(new SearchItem(item))
+        // resArray.push(item)
+      }
     }
     // const parsedRes = raw.map(r => JSON.parse(r.results))
     // const test = 'hold please'
