@@ -147,8 +147,8 @@ export default {
           })
           const locations = AppState.account.krogerLocations
           const body = { query: itemsToSend, locations: locations }
-
-          const sortType = await Pop.filterButtons
+          // debugger 
+          const sortType = await Pop.filterButtons()
 
           if (sortType) {
             await groceryListItemsService.sortListResults(body, sortType)
