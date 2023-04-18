@@ -75,7 +75,7 @@ export default {
     async function getSearchResults() {
       try {
         const search = {
-          query: route.params.searchQuery,
+          query: [route.params.searchQuery],
           locations: AppState.account.krogerLocations
         }
         await searchesService.getSearchResults(search);
