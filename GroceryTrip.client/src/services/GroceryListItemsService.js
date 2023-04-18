@@ -37,7 +37,7 @@ class GroceryListsItemsService {
 
     let pickedItems = []
 
-    let resultKeys = keys(results)
+    let resultKeys = body.query
 
     for (let i = 0; i < resultKeys.length; i++) {
 
