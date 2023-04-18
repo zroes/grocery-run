@@ -15,8 +15,9 @@ class TripService {
   }
 
   async getMyTripItems() {
-    const res = await api.get('api/tripItems')
+    const res = await api.get('account/tripItems')
     logger.log('Getting trip items', res.data)
+    AppState.fredMeyerTripItems = res.data.map(item => new tripItem(item))
   }
 
 }
