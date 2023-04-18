@@ -9,13 +9,13 @@
 
 
     <!-- SECTION Trip component goes here -->
-    <section class="row">
-
+    <section class="row justify-content-center my-3 rounded m-1 bg-grey py-2" v-if="account.id">
+      <MyTrip />
     </section>
 
 
     <!-- SECTION Lists -->
-    <section class="row justify-content-center mb-3 rounded m-1 bg-grey py-2">
+    <section class="row justify-content-center mb-3 rounded m-1 bg-grey py-2" v-if="account.id">
       <MyLists />
     </section>
   </div>
@@ -26,6 +26,7 @@ import MyLists from "../components/MyLists.vue"
 import SearchBar from "../components/SearchBar.vue"
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState.js"
+import MyTrip from "../components/MyTrip.vue"
 
 export default {
   setup() {
@@ -36,7 +37,7 @@ export default {
 
     }
   },
-  components: { MyLists, SearchBar }
+  components: { MyLists, SearchBar, MyTrip }
 }
 </script>
 
