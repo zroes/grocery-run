@@ -1,7 +1,7 @@
-import { AppState } from "../AppState.js";
-import { tripItem } from "../models/SearchResult.js";
-import { logger } from "../utils/Logger.js";
-import { api } from "./AxiosService.js";
+import { AppState } from "../AppState.js"
+import { tripItem } from "../models/SearchResult.js"
+import { logger } from "../utils/Logger.js"
+import { api } from "./AxiosService.js"
 
 class TripService {
   async createTripItem(selectedSearchResult) {
@@ -13,6 +13,13 @@ class TripService {
       AppState.genericTripItems.push(new tripItem(res.data))
     }
   }
+
+  async getMyTripItems() {
+    const res = await api.get('account/tripItems')
+    logger.log('Getting trip items', res.data)
+    AppState.fredMeyerTripItems = res.data.map(item => new tripItem(item))
+  }
+
 }
 
-export const tripService = new TripService();
+export const tripService = new TripService()

@@ -33,6 +33,30 @@ export default class Pop {
     }
   }
 
+
+  static async filterButtons() {
+    try {
+      const res = await Swal.fire({
+        title: "",
+        text: "How do you want your groceries picked?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "pick cheapest",
+        denyButtonText: "pick closest",
+
+      })
+      if (res.isConfirmed) {
+        return "price"
+      }
+      if (res.isDenied) {
+        return 'distance'
+      }
+      return false
+    } catch (error) {
+      return false
+    }
+  }
+
   /**
  *
  * @param {string} title The title text
