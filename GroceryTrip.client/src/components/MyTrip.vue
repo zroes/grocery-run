@@ -14,7 +14,7 @@
         <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
       </div>
       <div class="col-9">
-        <h5 :title="item?.name">{{ item?.name.length <= 25 ? item?.name : item?.name.slice(0, 25) + '...' }} </h5>
+        <h5 :title="item?.name">{{ item?.name.length <= 35 ? item?.name : item?.name.slice(0, 35) + '...' }} </h5>
             <div class="d-flex justify-content-between">
 
               <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
