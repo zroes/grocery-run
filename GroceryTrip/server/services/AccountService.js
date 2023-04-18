@@ -69,15 +69,6 @@ class AccountService {
     return account
   }
 
-  async getAllTripItems(accountId) {
-    const tripItems = await dbContext.TripItems.find({ accountId });
-
-    if (tripItems == null) {
-      throw new BadRequest("This Account does not have any TripItems")
-    }
-
-    return tripItems
-  }
 
   /**
    * Updates account with the request body, will only allow changes to editable fields

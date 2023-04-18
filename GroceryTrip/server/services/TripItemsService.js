@@ -1,11 +1,22 @@
-import { dbContext } from "../db/DbContext.js";
-import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { dbContext } from "../db/DbContext.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripItemsService {
+
+  async getAllTripItems(accountId) {
+    const tripItems = await dbContext.TripItems.find({ accountId })
+
+    if (tripItems == null) {
+      throw new BadRequest("This Account does not have any TripItems")
+    }
+
+    return tripItems
+  }
+
   async edit(tripItemEdits, tripItemId, userId) {
     const tripItem = await dbContext.TripItems.findById(tripItemId)
     if (tripItem == null) {
-      throw new BadRequest("That TripItem does not exist");
+      throw new BadRequest("That TripItem does not exist")
     }
 
     if (tripItem.accountId != userId) {
@@ -27,7 +38,7 @@ class TripItemsService {
   async delete(userId, tripItemId) {
     const tripItem = await dbContext.TripItems.findById(tripItemId)
     if (tripItem == null) {
-      throw new BadRequest("That TripItem does not exist");
+      throw new BadRequest("That TripItem does not exist")
     }
 
     if (tripItem.accountId != userId) {
@@ -49,10 +60,10 @@ class TripItemsService {
     }
   }
   async create(tripItemData) {
-    const tripItem = await dbContext.TripItems.create(tripItemData);
+    const tripItem = await dbContext.TripItems.create(tripItemData)
     return tripItem
   }
 
 }
 
-export const tripItemsService = new TripItemsService();
+export const tripItemsService = new TripItemsService()
