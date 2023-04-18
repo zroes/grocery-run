@@ -56,6 +56,7 @@ class StoreLocationsService {
         latLong.lat, latLong.long)
       element.distance = distance
       element.accountId = accountId
+      element.logo = element.name.includes('Fred Meyer') ? "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Fred_Meyer_logo.svg/2560px-Fred_Meyer_logo.svg.png" : "../assets/img/GenericCompanyPic.png"
       savedLocations.push(await dbContext.StoreLocations.create(element))
     }
     return savedLocations
