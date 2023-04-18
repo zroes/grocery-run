@@ -2,6 +2,7 @@ import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { searchesService } from "./SearchesService.js"
+import { tripService } from "./TripService.js"
 class GroceryListsItemsService {
 
 
@@ -49,7 +50,7 @@ class GroceryListsItemsService {
       }
     }
 
-
+    await tripService.addListToTrip(pickedItems)
 
   }
 }

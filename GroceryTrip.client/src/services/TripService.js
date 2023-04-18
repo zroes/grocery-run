@@ -19,7 +19,13 @@ class TripService {
     logger.log('Getting trip items', res.data)
     AppState.fredMeyerTripItems = res.data.map(item => new tripItem(item))
   }
-
+  async addListToTrip(pickedItems) {
+    pickedItems.forEach(async p => {
+      const res = await api.post(`api/tripItems`, p)
+      AppState.fredMeyerTripItems.push(new tripItem(res.data))
+    });
+  }
 }
+
 
 export const tripService = new TripService()
