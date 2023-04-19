@@ -12,7 +12,7 @@
           </div>
 
           <div class="col-2 p-0 my-3">
-            <button class="btn text-primary border border-primary itemBtn">Edit</button>
+            <button class="btn text-primary border border-primary itemBtn" @click="editItemChoice()">Edit</button>
           </div>
 
           <div class="col-6 d-flex justify-content-end">
