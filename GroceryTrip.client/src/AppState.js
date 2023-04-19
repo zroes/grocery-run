@@ -17,6 +17,7 @@ export const AppState = reactive({
 
   /** @type {import('./models/SearchResult.js').tripItem[]} */
   tripItems: [],
+  loading: false,
 
   toggle: false,
   activeGroceryList: null,

@@ -30,6 +30,8 @@
 
     </section>
 
+    <Loading v-if="loading" />
+
     <section class="row justify-content-center p-2 mt-1">
 
       <div class="col-md-10 p-2 px-3" v-for="r in SearchResults">
@@ -54,10 +56,13 @@ import { watchEffect, computed } from 'vue';
 import { searchesService } from '../services/SearchesService';
 import { AppState } from '../AppState';
 import SearchResultsItemsCard from '../components/SearchResultsItemCard.vue'
+import Loading from '../components/Loading.vue'
+
 
 export default {
   setup() {
     const route = useRoute();
+    let loading = false
 
     watchEffect(() => {
       if (AppState.account.id) {
@@ -79,7 +84,8 @@ export default {
           locations: AppState.account.krogerLocations
         }
         await searchesService.getSearchResults(search);
-      } catch (error) {
+      }
+      catch (error) {
         logger.error(error.message);
         Pop.error(error.message);
       }
@@ -97,7 +103,7 @@ export default {
 
     return {
       route,
-
+      loading: computed(() => AppState.loading),
       priceCheck: true,
       distanceCheck: false,
       SearchResults: computed(() => AppState.searchResults),
@@ -120,7 +126,7 @@ export default {
 
     }
   },
-  components: { SearchResultsItemsCard }
+  components: { SearchResultsItemsCard, Loading }
 }
 </script>
 
