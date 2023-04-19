@@ -2,7 +2,6 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripItemsService {
-
   async getAllTripItems(accountId) {
     const tripItems = await dbContext.TripItems.find({ accountId })
 
@@ -62,6 +61,10 @@ class TripItemsService {
   async create(tripItemData) {
     const tripItem = await dbContext.TripItems.create(tripItemData)
     return tripItem
+  }
+
+  async clearTrip(accountId) {
+    await dbContext.TripItems.deleteMany({ accountId: accountId })
   }
 
 }

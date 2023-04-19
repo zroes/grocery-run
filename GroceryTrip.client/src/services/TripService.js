@@ -23,7 +23,13 @@ class TripService {
     pickedItems.forEach(async p => {
       const res = await api.post(`api/tripItems`, p)
       AppState.tripItems.push(new tripItem(res.data))
-    });
+    })
+  }
+
+  async clearTrip() {
+    const res = await api.delete('api/tripItems')
+    AppState.tripItems = []
+    logger.log(AppState.tripItems, res.data)
   }
 }
 
