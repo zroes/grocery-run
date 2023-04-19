@@ -88,6 +88,7 @@ export default {
       catch (error) {
         logger.error(error.message);
         Pop.error(error.message);
+        AppState.loading = false
       }
     }
 

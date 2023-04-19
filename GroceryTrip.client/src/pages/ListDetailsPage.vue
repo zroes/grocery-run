@@ -73,6 +73,7 @@ export default {
         await groceryListItemsService.getItemsOnList(listId)
       }
       catch (error) {
+        AppState.loading = false
         logger.error(error)
         Pop.error(error.message)
       }
@@ -161,6 +162,7 @@ export default {
         catch (error) {
           logger.error(error)
           Pop.error(error.message)
+          AppState.loading = false
         }
       }
       // public variables and methods here
