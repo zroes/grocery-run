@@ -5,8 +5,11 @@ import { api } from "./AxiosService.js"
 
 class SearchesService {
   async getSearchResults(search) {
+    AppState.searchResults = null
     // logger.log(search)
+    AppState.loading = true
     const res = await api.post('api/search', search)
+    AppState.loading = false
     let rawSearchResults = res.data.map(s => new SearchResult(s))
     logger.log(rawSearchResults)
     AppState.unsortedSearchResults = rawSearchResults.filter(r => r.price != null)
