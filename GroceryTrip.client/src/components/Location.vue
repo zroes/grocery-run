@@ -17,7 +17,7 @@
 
   <div class="row my-2" v-for="item in items0">
     <!-- NOTE use <TripItem /> component -->
-    <div class="col-3 d-flex align-items-center justify-content-center p-0 bg-white rounded elevation-3">
+    <!-- <div class="col-3 d-flex align-items-center justify-content-center p-0 bg-white rounded elevation-3">
       <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
     </div>
     <div class="col-9">
@@ -27,7 +27,7 @@
             <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
             <h6 class="">{{ item?.size }}</h6>
           </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
