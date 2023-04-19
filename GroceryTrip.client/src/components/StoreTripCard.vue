@@ -4,11 +4,32 @@
   </div>
   <div class="col-9">
     <h5 :title="item?.name">{{ item?.name.length <= 50 ? item?.name : item?.name.slice(0, 50) + '...' }} </h5>
-        <div class="d-flex justify-content-between">
+        <section class="row justify-content-between">
 
-          <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
-          <h6 class="">{{ item?.size }}</h6>
-        </div>
+          <div class="col-4 d-flex flex-column justify-content-between">
+            <h6 class="">{{ item?.size }}</h6>
+            <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
+          </div>
+
+          <div class="col-2 p-0 my-3">
+            <button class="btn text-primary border border-primary itemBtn">Edit</button>
+          </div>
+
+          <div class="col-6 d-flex justify-content-end">
+            <div class="d-flex align-items-center me-3">
+              <div class="p-1"><i class="mdi mdi-cart-outline display-6 text-dark"></i></div>
+              <div>
+                <span class="bg-light p-2 rounded"> {{ item?.quantity }} </span>
+              </div>
+            </div>
+            <div>
+              <div class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"> <i class="mdi mdi-arrow-up"></i> </div>
+              <div class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"> <i class="mdi mdi-arrow-down"></i> </div>
+            </div>
+          </div>
+
+        </section>
+
   </div>
 </template>
 
@@ -33,7 +54,16 @@ export default {
 
 <style scoped>
 .itemPic {
-  max-width: 24vw;
+  max-width: 23vw;
   height: 12vh;
+}
+
+.itemBtn:hover {
+  filter: brightness(0.95);
+}
+
+.itemBtn:active {
+  filter: brightness(0.95);
+  transform: scale(0.95);
 }
 </style>
