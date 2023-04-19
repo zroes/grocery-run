@@ -1,5 +1,5 @@
 <template>
-  <div class="row py-3 px-2 bg-grey">
+  <div class="row py-3 px-2 bg-grey rounded">
     <div class="col-3 d-flex align-items-center justify-content-center p-0">
       <img class="rounded itemPic" :src="r?.image" :alt="r?.name">
     </div>
