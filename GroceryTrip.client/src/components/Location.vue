@@ -36,9 +36,15 @@ import { computed } from "vue"
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
+import { StoreLocation } from "../models/StoreLocation.js"
 export default {
+  props: {
+    location: { type: StoreLocation, required: true }
+  },
   setup() {
     // private variables and methods here
+    const items0 = computed(() => AppState.tripItems.filter
+      (t => t.locationId == AppState.account.krogerLocations[0].locationId))
     return {
       // public variables and methods here
     }
