@@ -4,7 +4,7 @@
       <img class="logo" :src="location?.logo" alt="Fred Meyer">
     </div>
     <h4 class="my-2">{{ location?.distance }} miles</h4>
-    <h4 class="my-2"> ${{ price0?.toFixed(2) }}</h4>
+    <h4 class="my-2"> ${{ finalPrice?.toFixed(2) }}</h4>
   </div>
 
   <!-- <div class="row my-2" v-for="item in Items0" v-if="location == " laction#1">
@@ -47,9 +47,14 @@ export default {
   },
   setup(props) {
     // private variables and methods here
-    const items = computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId))
+    const items = computed(() => AppState.tripItems.filter(t => t.locationId == props.location.locationId))
     return {
-      items: items.value,
+      items: computed(() => items.value),
+      finalPrice: computed(() => {
+        let price = 0
+        items.value.forEach(item => price += item.price * item.quantity)
+        return price
+      }),
       // location: props.location
       // public variables and methods here
     }
