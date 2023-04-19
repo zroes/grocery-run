@@ -42,6 +42,7 @@
       </div>
 
     </section>
+    <p class="text-light opacity-75">Not seeing what you want? Try a more specific search!</p>
 
   </div>
 </template>
@@ -62,7 +63,6 @@ import Loading from '../components/Loading.vue'
 export default {
   setup() {
     const route = useRoute();
-    let loading = false
 
     watchEffect(() => {
       if (AppState.account.id) {
@@ -74,6 +74,11 @@ export default {
     watchEffect(() => {
       route.params
       sortSearchResults();
+    })
+
+    watchEffect(() => {
+      route.params
+      getSearchResults();
     })
 
 

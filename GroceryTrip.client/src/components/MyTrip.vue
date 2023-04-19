@@ -4,9 +4,8 @@
     <Location :location="location" />
   </div>
   <button v-if="tripItems.length != 0" @click="clearTrip()" class="btn btn-danger col-5 py-2">Clear Trip</button>
-  <p v-else class="text-dark fw-bold opacity-75">You have nothing on your trip. Get started by searching for an item and
-    adding
-    it!</p>
+  <p v-else class="text-light fw-bold opacity-50">You have nothing added to your trip.<br>
+    Get started by searching for an item and adding it!</p>
 </template>
 
 <script>
