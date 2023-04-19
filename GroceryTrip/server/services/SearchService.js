@@ -40,7 +40,7 @@ class SearchService {
         let item = parsedRes0[i][j]
         item.locationId = locations[0].locationId
         item.store = "FRED MEYER"
-        item.query = query
+        item.query = query[0]
         resArray.push(new SearchItem(item))
         // resArray.push(item)
       }
@@ -71,7 +71,7 @@ class SearchService {
       let item = parsedRes1[i]
       item.locationId = locations[1].locationId
       item.store = "FRED MEYER"
-      item.query = query
+      item.query = query[0]
       resArray.push(new SearchItem(item))
     }
 
