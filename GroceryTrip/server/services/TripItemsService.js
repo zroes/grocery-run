@@ -12,7 +12,7 @@ class TripItemsService {
     return tripItems
   }
 
-  async edit(tripItemEdits, tripItemId, userId) {
+  async edit(tripItemId, userId) {
     const tripItem = await dbContext.TripItems.findById(tripItemId)
     if (tripItem == null) {
       throw new BadRequest("That TripItem does not exist")
@@ -22,19 +22,13 @@ class TripItemsService {
       throw new Forbidden(`You are not authorized to edit this TripItem`)
     }
 
-    const oldQuantity = tripItem.quantity
+    tripItem.quantity++
 
-    tripItem.quantity = tripItemEdits.quantity || tripItem.quantity
-
-    if (tripItem.quantity == oldQuantity) {
-      throw new BadRequest("The Edit has failed, The Item's Quantity did not change")
-    } else {
-      await tripItem.save()
-    }
+    await tripItem.save()
 
     return tripItem
   }
-  async delete(userId, tripItemId) {
+  async decreaseThenDelete(userId, tripItemId) {
     const tripItem = await dbContext.TripItems.findById(tripItemId)
     if (tripItem == null) {
       throw new BadRequest("That TripItem does not exist")
