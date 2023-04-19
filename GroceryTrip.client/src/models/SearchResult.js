@@ -10,6 +10,7 @@ export class SearchResult {
     this.distance = data.distance || AppState.account.krogerLocations.find(l => l.locationId == data.locationId).distance
     this.store = data.store
     this.image = data.image
+    this.query = data.query
   }
 }
 
