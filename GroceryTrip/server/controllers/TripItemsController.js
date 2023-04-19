@@ -16,16 +16,6 @@ export class TripItemsController extends BaseController {
       .put(`/:tripItemId`, this.edit)
   }
 
-  async delete(req, res, next) {
-    try {
-      const userId = req.userInfo.id
-      const tripItemId = req.params.tripItemId
-      const message = await tripItemsService.delete(userId, tripItemId)
-      return res.send(message)
-    } catch (error) {
-      next(error)
-    }
-  }
   async create(req, res, next) {
     try {
       const accountId = req.userInfo.id
@@ -65,6 +55,16 @@ export class TripItemsController extends BaseController {
       const accountId = req.userInfo.id
       await tripItemsService.clearTrip(accountId)
       res.send()
+    } catch (error) {
+      next(error)
+    }
+  }
+  async delete(req, res, next) {
+    try {
+      const userId = req.userInfo.id
+      const tripItemId = req.params.tripItemId
+      const message = await tripItemsService.delete(userId, tripItemId)
+      return res.send(message)
     } catch (error) {
       next(error)
     }

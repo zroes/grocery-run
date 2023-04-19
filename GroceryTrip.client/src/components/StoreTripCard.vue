@@ -12,8 +12,7 @@
           </div>
 
           <div class="col-2 p-0 my-3">
-            <button class="btn text-primary border border-primary itemBtn"
-              @click="editItemChoice(item?.query)">Edit</button>
+            <button class="btn text-primary border border-primary itemBtn" @click="editItemChoice(item)">Edit</button>
           </div>
 
           <div class="col-6 d-flex justify-content-end">
@@ -45,6 +44,9 @@ import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import { tripItem } from "../models/SearchResult.js"
+import { tripService } from "../services/TripService.js"
+import { router } from "../router.js"
+
 export default {
   props: {
     item: { type: tripItem, required: true }
@@ -52,9 +54,14 @@ export default {
   setup() {
     // private variables and methods here
     return {
-      async editItemChoice(query) {
+      async editItemChoice(item) {
         try {
-          Pop.confirm("Are you sure that you want to edit this Item? This Item will be removed from your trip")
+          const query = item.query
+          if (await Pop.confirm("Are you sure that you want to edit this Item? This Item will be removed from your trip")) {
+            router.push({ name: 'SearchResults', params: { searchQuery: query, sortType: "price" } })
+            await tripService.deleteTripItem(item.id)
+          }
+
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);

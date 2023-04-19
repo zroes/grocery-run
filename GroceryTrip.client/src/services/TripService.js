@@ -40,6 +40,12 @@ class TripService {
     AppState.tripItems = []
     logger.log(AppState.tripItems, res.data)
   }
+
+  async deleteTripItem(itemId) {
+    await api.delete(`api/tripItems/${itemId}`)
+    AppState.tripItems = AppState.tripItems.filter(t => t.id != itemId)
+  }
+
 }
 
 
