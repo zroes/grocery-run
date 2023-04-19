@@ -10,15 +10,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link :to="{ name: 'Home' }">
-            <button class="btn btn-success">
-              My Cart <i class="mdi mdi-cart-outline"></i>
-            </button>
-          </router-link>
-        </li>
-      </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
     </div>
