@@ -10,9 +10,19 @@ export class TripItemsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post(``, this.create)
+      .delete(`/:tripItemId/decrease`, this.decreaseThenDelete)
       .delete(`/:tripItemId`, this.delete)
       .delete('', this.clearTrip)
       .put(`/:tripItemId`, this.edit)
+  }
+
+  async delete(req, res, next) {
+    try {
+
+      return res.send()
+    } catch (error) {
+      next(error)
+    }
   }
   async create(req, res, next) {
     try {
@@ -26,11 +36,11 @@ export class TripItemsController extends BaseController {
     }
   }
 
-  async delete(req, res, next) {
+  async decreaseThenDelete(req, res, next) {
     try {
       const userId = req.userInfo.id
       const tripItemId = req.params.tripItemId
-      const message = await tripItemsService.delete(userId, tripItemId)
+      const message = await tripItemsService.decreaseThenDelete(userId, tripItemId)
       return res.send(message)
     } catch (error) {
       next(error)
@@ -40,9 +50,8 @@ export class TripItemsController extends BaseController {
   async edit(req, res, next) {
     try {
       const userId = req.userInfo.id
-      const tripItemEdits = req.body
       const tripItemId = req.params.tripItemId
-      const tripItem = await tripItemsService.edit(tripItemEdits, tripItemId, userId)
+      const tripItem = await tripItemsService.edit(tripItemId, userId)
       return res.send(tripItem)
     } catch (error) {
       next(error)
