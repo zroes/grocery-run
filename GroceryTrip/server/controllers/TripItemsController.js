@@ -18,8 +18,10 @@ export class TripItemsController extends BaseController {
 
   async delete(req, res, next) {
     try {
-
-      return res.send()
+      const userId = req.userInfo.id
+      const tripItemId = req.params.tripItemId
+      const message = await tripItemsService.delete(userId, tripItemId)
+      return res.send(message)
     } catch (error) {
       next(error)
     }

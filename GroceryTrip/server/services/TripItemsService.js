@@ -2,6 +2,9 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripItemsService {
+  delete(userId, tripItemId) {
+    throw new Error("Method not implemented.")
+  }
   async getAllTripItems(accountId) {
     const tripItems = await dbContext.TripItems.find({ accountId })
 
