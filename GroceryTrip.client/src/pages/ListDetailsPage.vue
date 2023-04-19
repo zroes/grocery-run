@@ -152,6 +152,7 @@ export default {
 
           if (sortType) {
             await groceryListItemsService.sortListResults(body, sortType)
+            router.push({ name: 'Home' })
           }
         } catch (error) {
           logger.error(error)
