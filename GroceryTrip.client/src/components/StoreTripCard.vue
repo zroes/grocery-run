@@ -31,4 +31,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.itemPic {
+  max-width: 24vw;
+  height: 12vh;
+}
+</style>
