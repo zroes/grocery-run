@@ -66,13 +66,15 @@ class SearchService {
 
     const raw1 = await Promise.all(promises1)
 
-    const parsedRes1 = raw1.map(r => JSON.parse(r.data).data).flat(1)
+    const parsedRes1 = raw1.map(r => JSON.parse(r.data).data)
     for (let i = 0; i < parsedRes0.length; i++) {
-      let item = parsedRes1[i]
-      item.locationId = locations[1].locationId
-      item.store = "FRED MEYER"
-      item.query = query[0]
-      resArray.push(new SearchItem(item))
+      for (let j = 0; j < parsedRes0[i].length; j++) {
+        let item = parsedRes1[i][j]
+        item.locationId = locations[1].locationId
+        item.store = "FRED MEYER"
+        item.query = query[0]
+        resArray.push(new SearchItem(item))
+      }
     }
 
 

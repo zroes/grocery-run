@@ -23,6 +23,7 @@ class GroceryListsItemsService {
     const res = await api.get('api/lists/' + listId + '/items')
     logger.log(res.data)
     AppState.activeGroceryListItems = res.data
+    AppState.loading = false
   }
 
   async toggleInclude(itemId) {
@@ -33,8 +34,9 @@ class GroceryListsItemsService {
   }
 
   async sortListResults(body, sortType) {
+    AppState.loading = true
     const results = await searchesService.searchList(body)
-
+    AppState.loading = false
     let pickedItems = []
 
     let resultKeys = body.query

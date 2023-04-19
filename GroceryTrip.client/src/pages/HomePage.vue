@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid">
+  <Loading v-if="loading" />
+  <div v-else class="container-fluid">
 
     <!--NOTE search bar goes here -->
     <div class="row justify-content-center p-2 mt-1" v-if="account.id">
@@ -27,17 +28,18 @@ import SearchBar from "../components/SearchBar.vue"
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState.js"
 import MyTrip from "../components/MyTrip.vue"
+import Loading from "../components/Loading.vue"
 
 export default {
   setup() {
     return {
       sortType: 'price',
-
+      loading: computed(() => AppState.loading),
       account: computed(() => AppState.account),
 
     }
   },
-  components: { MyLists, SearchBar, MyTrip }
+  components: { MyLists, SearchBar, MyTrip, Loading }
 }
 </script>
 

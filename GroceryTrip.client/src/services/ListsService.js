@@ -18,6 +18,7 @@ class ListsService {
 
   async getListById(listId) {
     AppState.activeGroceryList = null
+    AppState.loading = true
     const res = await api.get('api/lists/' + listId)
     AppState.activeGroceryList = res.data
   }
