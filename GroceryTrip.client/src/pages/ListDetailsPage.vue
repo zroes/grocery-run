@@ -23,7 +23,7 @@
         <button class="btn btn-primary col-2">Add</button>
       </form>
       <div class="text-center">
-        <button @click="switchToggle" class="col-3 btn border-warning text-warning">Cancel</button>
+        <button @click="switchToggle" class="col-3 btn btn-secondary border-warning text-warning">Cancel</button>
       </div>
     </div>
     <button v-if="!toggle" @click="switchToggle" class="my-3 btn btn-dark"><i class="mdi mdi-note-plus-outline"> Add

@@ -7,6 +7,7 @@ export class SearchItem {
     this.size = data.items[0].size
     this.locationId = data.locationId
     this.store = data.store
+    this.query = data.query
 
   }
   getImage(images) {

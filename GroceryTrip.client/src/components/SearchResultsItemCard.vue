@@ -44,6 +44,7 @@ export default {
       async createTripItem(selectedSearchResult) {
         try {
           await tripService.createTripItem(selectedSearchResult);
+          Pop.toast("Added item to trip!", 'success', 'top', 1700)
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);

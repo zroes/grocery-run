@@ -3,6 +3,7 @@ import { Kroger } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
 class SearchService {
+  // FIXME refactor later (need to do the front end too)
   async getKrogerSearch(query, locations) {
     let token = await krogerAuthorizationService.getAuthorization()
 
@@ -39,6 +40,7 @@ class SearchService {
         let item = parsedRes0[i][j]
         item.locationId = locations[0].locationId
         item.store = "FRED MEYER"
+        item.query = query
         resArray.push(new SearchItem(item))
         // resArray.push(item)
       }
@@ -69,6 +71,7 @@ class SearchService {
       let item = parsedRes1[i]
       item.locationId = locations[1].locationId
       item.store = "FRED MEYER"
+      item.query = query
       resArray.push(new SearchItem(item))
     }
 

@@ -9,6 +9,7 @@ export const TripItemSchema = new Schema({
   size: { type: String, required: true, minLength: 3, maxLength: 100 },
   // NOTE other stores might not use 8 digit location ids
   locationId: { type: String, required: true, minLength: 8, maxLength: 8 },
+  query: { type: String, required: true },
   store: { type: String, required: true, minLength: 3, maxLength: 100 },
   brand: { type: String, required: true, minLength: 3, maxLength: 100 },
   accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
