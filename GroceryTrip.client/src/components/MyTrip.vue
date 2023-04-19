@@ -56,15 +56,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.itemPic {
-  max-width: 24vw;
-  height: 12vh;
-}
-
-.logo {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 2px 5px #2d2b37);
-}
-</style>
+<style scoped></style>

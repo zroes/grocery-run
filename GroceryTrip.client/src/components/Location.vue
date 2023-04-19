@@ -39,15 +39,18 @@ import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import { StoreLocation } from "../models/StoreLocation.js"
 import StoreTripCard from "./StoreTripCard.vue"
+
+
 export default {
   props: {
     location: { type: StoreLocation, required: true }
   },
-  setup() {
+  setup(props) {
     // private variables and methods here
     const items = computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId))
     return {
-      items: items.value
+      items: items.value,
+      // location: props.location
       // public variables and methods here
     }
   },
@@ -55,4 +58,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.logo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 5px #2d2b37);
+}
+</style>
