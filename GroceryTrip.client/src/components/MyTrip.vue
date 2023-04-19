@@ -1,38 +1,9 @@
 <template>
   <h4>My Trip</h4>
   <div v-for="location in locations">
-    <div class="d-flex justify-content-between mb-3">
-      <div class="col-5 my-2">
-        <img class="logo" :src="location?.logo" alt="Fred Meyer">
-      </div>
-      <h4 class="my-2">{{ location?.distance }} miles</h4>
-      <h4 class="my-2"> ${{ Price0?.toFixed(2) }}</h4>
-    </div>
-
-    <!-- <div class="row my-2" v-for="item in Items0" v-if="location == " laction#1">
-      ***Item Component Here***
-    </div>
-    <div class="row my-2" v-for="item in Items1" v-if="location == " laction#1">
-      ***Item Component Here***
-    </div> -->
-
-
-    <div class="row my-2" v-for="item in Items0">
-      <!-- NOTE use <TripItem /> component -->
-      <div class="col-3 d-flex align-items-center justify-content-center p-0 bg-white rounded elevation-3">
-        <img class="rounded itemPic" :src="item?.image" :alt="item?.name">
-      </div>
-      <div class="col-9">
-        <h5 :title="item?.name">{{ item?.name.length <= 50 ? item?.name : item?.name.slice(0, 50) + '...' }} </h5>
-            <div class="d-flex justify-content-between">
-
-              <h6>{{ '$' + item?.price.toFixed(2) }}</h6>
-              <h6 class="">{{ item?.size }}</h6>
-            </div>
-      </div>
-
-    </div>
+    <Location :location="location" />
   </div>
+  <button class="btn btn-danger col-5 py-2">Clear Trip</button>
 </template>
 
 <script>
@@ -41,6 +12,8 @@ import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import { tripService } from "../services/TripService.js"
+import Location from "../components/Location.vue"
+
 export default {
   setup() {
     // private variables and methods here
@@ -51,29 +24,35 @@ export default {
         logger.error(error)
         Pop.error(error.message)
       }
-    }
+    } // TODO use components instead
+    const items0 = computed(() => AppState.tripItems.filter
+      (t => t.locationId == AppState.account.krogerLocations[0].locationId))
+
+    const items1 = computed(() => AppState.tripItems.filter
+      (t => t.locationId == AppState.account.krogerLocations[1].locationId))
 
     onMounted(() => {
       getMyTripItems()
     })
     return {
       // NOTE This will need Refactoring
-      Items0: computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId)),
-      Price0: computed(() => {
+      items0: computed(() => items0.value),
+      price0: computed(() => {
         let price = 0
-        AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[0].locationId).forEach(item => price += item.price * item.quantity)
+        items0.value.forEach(item => price += item.price * item.quantity)
         return price
       }),
-      Items1: computed(() => AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[1].locationId)),
-      Price1: computed(() => {
+      items1: computed(() => items1.value),
+      price1: computed(() => {
         let price = 0
-        AppState.tripItems.filter(t => t.locationId == AppState.account.krogerLocations[1].locationId).forEach(item => price += item.price * item.quantity)
+        items1.value.forEach(item => price += item.price * item.quantity)
         return price
       }),
       locations: computed(() => AppState.account.krogerLocations)
       // public variables and methods here
     }
   },
+  components: { Location }
 }
 </script>
 
