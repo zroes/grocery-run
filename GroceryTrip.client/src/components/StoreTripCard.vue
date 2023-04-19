@@ -12,7 +12,8 @@
           </div>
 
           <div class="col-2 p-0 my-3">
-            <button class="btn text-primary border border-primary itemBtn" @click="editItemChoice()">Edit</button>
+            <button class="btn text-primary border border-primary itemBtn"
+              @click="editItemChoice(item?.query)">Edit</button>
           </div>
 
           <div class="col-6 d-flex justify-content-end">
@@ -23,8 +24,13 @@
               </div>
             </div>
             <div>
-              <div class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"> <i class="mdi mdi-arrow-up"></i> </div>
-              <div class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"> <i class="mdi mdi-arrow-down"></i> </div>
+              <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"> <i
+                  class="mdi mdi-chevron-up"></i> </div>
+
+              <div title="Decrease Quantity" class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"
+                v-if="item?.quantity > 1"> <i class="mdi mdi-chevron-down"></i> </div>
+              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else> <i
+                  class="mdi mdi-delete-outline"></i> </div>
             </div>
           </div>
 
@@ -46,7 +52,14 @@ export default {
   setup() {
     // private variables and methods here
     return {
-      // public variables and methods here
+      async editItemChoice(query) {
+        try {
+          Pop.confirm("Are you sure that you want to edit this Item? This Item will be removed from your trip")
+        } catch (error) {
+          logger.error(error.message);
+          Pop.error(error.message);
+        }
+      }
     }
   },
 }
