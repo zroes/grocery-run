@@ -6,7 +6,8 @@
     <h4 class="my-2">{{ location?.distance }} miles</h4>
     <h4 class="my-2"> ${{ finalPrice?.toFixed(2) }}</h4>
   </div>
-  <div class="row my-2" v-for="item in items">
+  <div role="button" class="row my-2 no-select" v-for="item in items" :class="{ 'opacity-50 bg-dark': !item?.included }"
+    @click="toggleInclude(item)">
     <!-- NOTE use <TripItem /> component -->
     <StoreTripCard :item="item" />
 
@@ -16,8 +17,10 @@
 <script>
 import { computed } from "vue"
 import { AppState } from "../AppState.js"
-import { StoreLocation } from "../models/StoreLocation.js"
 import StoreTripCard from "./StoreTripCard.vue"
+import { logger } from "../utils/Logger.js"
+import Pop from "../utils/Pop.js"
+import { tripService } from "../services/TripService.js"
 
 
 export default {
@@ -36,6 +39,15 @@ export default {
       }),
       // location: props.location
       // public variables and methods here
+      async toggleInclude(item) {
+        try {
+          await tripService.toggleInclude(item)
+        }
+        catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      },
     }
   },
   components: { StoreTripCard }
