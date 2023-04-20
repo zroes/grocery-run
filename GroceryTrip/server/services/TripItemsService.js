@@ -12,8 +12,8 @@ class TripItemsService {
     return tripItems
   }
 
-  async edit(tripItemId, userId) {
-    const tripItem = await dbContext.TripItems.findById(tripItemId)
+  async edit(tripItemData, userId) {
+    const tripItem = await dbContext.TripItems.findById(tripItemData.id)
     if (tripItem == null) {
       throw new BadRequest("That TripItem does not exist")
     }
@@ -22,36 +22,36 @@ class TripItemsService {
       throw new Forbidden(`You are not authorized to edit this TripItem`)
     }
 
-    tripItem.quantity++
+    tripItem.quantity = tripItemData.quantity || tripItem.quantity
 
     await tripItem.save()
 
     return tripItem
   }
-  async decreaseThenDelete(userId, tripItemId) {
-    const tripItem = await dbContext.TripItems.findById(tripItemId)
-    if (tripItem == null) {
-      throw new BadRequest("That TripItem does not exist")
-    }
+  // async decreaseThenDelete(userId, tripItemId) {
+  //   const tripItem = await dbContext.TripItems.findById(tripItemId)
+  //   if (tripItem == null) {
+  //     throw new BadRequest("That TripItem does not exist")
+  //   }
 
-    if (tripItem.accountId != userId) {
-      throw new Forbidden(`You are not authorized to delete this TripItem`)
-    }
+  //   if (tripItem.accountId != userId) {
+  //     throw new Forbidden(`You are not authorized to delete this TripItem`)
+  //   }
 
-    if (tripItem.quantity > 0) {
-      tripItem.quantity--
-    } else {
-      throw new BadRequest("The TripItem you are trying to delete, already has a quantity of Zero")
-    }
+  //   if (tripItem.quantity > 0) {
+  //     tripItem.quantity--
+  //   } else {
+  //     throw new BadRequest("The TripItem you are trying to delete, already has a quantity of Zero")
+  //   }
 
-    if (tripItem.quantity <= 0) {
-      await tripItem.delete()
-      return `Your TripItem has been deleted`
-    } else {
-      await tripItem.save()
-      return `Your ${tripItem.name} las been decreased to a quantity of ${tripItem.quantity}`
-    }
-  }
+  //   if (tripItem.quantity <= 0) {
+  //     await tripItem.delete()
+  //     return `Your TripItem has been deleted`
+  //   } else {
+  //     await tripItem.save()
+  //     return tripItem
+  //   }
+  // }
   async create(tripItemData) {
     const tripItem = await dbContext.TripItems.create(tripItemData)
     return tripItem

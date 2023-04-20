@@ -59,7 +59,7 @@ export default {
           const query = item.query
           if (await Pop.confirm("Are you sure that you want to edit this Item? This Item will be removed from your trip")) {
             router.push({ name: 'SearchResults', params: { searchQuery: query, sortType: "price" } })
-            await tripService.deleteTripItem(item.id)
+            await tripService.deleteTripItem(item)
           }
         } catch (error) {
           logger.error(error.message);
@@ -69,7 +69,7 @@ export default {
 
       async increaseQuantity(item) {
         try {
-          await tripService.increaseQuantity(item.id)
+          await tripService.increaseQuantity(item)
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);
@@ -78,9 +78,15 @@ export default {
 
       async decreaseQuantityOrDelete(item) {
         try {
-          await tripService.decreaseQuantityOrDelete(item.id)
+          if (item.quantity <= 1) {
+            if (await Pop.confirm("Are you Sure you want to delete this Item?")) {
+              await tripService.deleteTripItem(item)
+            }
+          } else {
+            await tripService.decreaseQuantity(item)
+          }
         } catch (error) {
-          logger.error(error.message);
+          logger.error(error);
           Pop.error(error.message);
         }
       }
