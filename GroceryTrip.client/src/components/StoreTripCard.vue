@@ -18,28 +18,31 @@
           </div>
 
           <div class="col-6 d-flex justify-content-end">
-            <div class="d-flex align-items-center me-3">
-              <div class="p-1"><i class="mdi mdi-cart-outline display-6 text-black"></i></div>
-              <div>
-                <span class="bg-light p-2 rounded"> {{ item?.quantity }} </span>
-              </div>
-            </div>
-            <div>
+            <div class="row">
 
-              <!-- :class="{ 'order-3': !item.included }, { 'order-2': item.included }" -->
-
-              <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"
-                @click.stop="increaseQuantity(item)" :class="{ 'hide': !item.included }">
-                <i class="mdi mdi-chevron-up"></i>
+              <div class="col-5 d-flex align-items-center me-3"
+                :class="{ 'order-2': !item.included }, { 'order-1': item.included }">
+                <div class="p-1"><i class="mdi mdi-cart-outline display-6 text-black"></i></div>
+                <div>
+                  <span class="bg-light p-2 rounded"> {{ item?.quantity }} </span>
+                </div>
               </div>
 
-              <div title="Decrease Quantity" class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"
-                v-if="item?.quantity > 1" @click.stop="decreaseQuantityOrDelete(item)"
-                :class="{ 'hide': !item.included }"> <i class="mdi mdi-chevron-down"></i>
+              <div class="col-5" :class="{ 'order-1': !item.included }, { 'order-2': item.included }">
+                <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"
+                  @click.stop="increaseQuantity(item)" :class="{ 'hide': !item.included }">
+                  <i class="mdi mdi-chevron-up"></i>
+                </div>
+
+                <div title="Decrease Quantity" class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"
+                  v-if="item?.quantity > 1" @click.stop="decreaseQuantityOrDelete(item)"
+                  :class="{ 'hide': !item.included }"> <i class="mdi mdi-chevron-down"></i>
+                </div>
+                <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else
+                  @click.stop="decreaseQuantityOrDelete(item)" :class="{ 'hide': !item.included }"> <i
+                    class="mdi mdi-delete-outline"></i> </div>
               </div>
-              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else
-                @click.stop="decreaseQuantityOrDelete(item)" :class="{ 'hide': !item.included }"> <i
-                  class="mdi mdi-delete-outline"></i> </div>
+
             </div>
           </div>
 
