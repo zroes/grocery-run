@@ -80,7 +80,7 @@ export default {
         try {
           await tripService.decreaseQuantityOrDelete(item.id)
         } catch (error) {
-          logger.error(error.message);
+          logger.error(error);
           Pop.error(error.message);
         }
       }

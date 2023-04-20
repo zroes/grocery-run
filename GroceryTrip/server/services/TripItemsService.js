@@ -49,7 +49,7 @@ class TripItemsService {
       return `Your TripItem has been deleted`
     } else {
       await tripItem.save()
-      return `Your ${tripItem.name} las been decreased to a quantity of ${tripItem.quantity}`
+      return tripItem
     }
   }
   async create(tripItemData) {
