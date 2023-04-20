@@ -10,7 +10,8 @@ class SearchesService {
     AppState.loading = true
     const res = await api.post('api/search', search)
     AppState.loading = false
-    let rawSearchResults = res.data.map(s => new SearchResult(s))
+    const query = search.query[0]
+    let rawSearchResults = res.data[query].map(s => new SearchResult(s))
     logger.log(rawSearchResults)
     AppState.unsortedSearchResults = rawSearchResults.filter(r => r.price != null)
   }
@@ -28,7 +29,7 @@ class SearchesService {
   }
 
   async searchList(body) {
-    const res = await api.post('api/search/trips', body)
+    const res = await api.post('api/search', body)
     return res.data
   }
 

@@ -8,8 +8,8 @@ export class SearchController extends BaseController {
   constructor() {
     super('api/search')
     this.router
-      .post('', this.getSearchResults)
-      .post('/trips', this.manySearch)
+      // .post('', this.getSearchResults)
+      .post('', this.manySearch)
   }
   async getSearchResults(req, res, next) {
     try {
