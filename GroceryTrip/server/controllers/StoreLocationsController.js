@@ -17,9 +17,9 @@ export class StoreLocationsController extends BaseController {
       const accountId = req.userInfo.id
       const latLong = req.body
       const krogerLocations = await storeLocationsService.addKrogerLocations(latLong, accountId)
-      // const albertsonsLocations = await storeLocationsService.addAlbertsonsLocations(latLong, accountId)
-      // const locations = krogerLocations.concat(albertsonsLocations)
-      return res.send(krogerLocations)
+      const albertsonsLocations = await storeLocationsService.addAlbertsonsLocations(latLong, accountId)
+      const locations = krogerLocations.concat(albertsonsLocations)
+      return res.send(locations)
     }
     catch (error) {
       next(error)

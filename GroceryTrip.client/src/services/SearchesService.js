@@ -10,6 +10,7 @@ class SearchesService {
     AppState.loading = true
     const res = await api.post('api/search', search)
     AppState.loading = false
+    logger.log(res.data)
     const query = search.query[0]
     let rawSearchResults = res.data[query].map(s => new SearchResult(s))
     logger.log(rawSearchResults)

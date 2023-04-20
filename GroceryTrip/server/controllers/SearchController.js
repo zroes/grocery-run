@@ -30,9 +30,10 @@ export class SearchController extends BaseController {
     try {
       const query = req.body.query
       const locations = req.body.locations
-      const results = await listSearchService.getItemsFromListForTrip(query, locations)
-
-      return res.send(results)
+      const krogerResults = await listSearchService.getItemsFromListForTrip(query, locations)
+      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations)
+      // const results = krogerResults.concat(albertsonsResults)
+      return res.send(krogerResults)
     }
     catch (error) {
       next(error)
