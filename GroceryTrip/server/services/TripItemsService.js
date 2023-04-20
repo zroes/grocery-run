@@ -2,9 +2,6 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripItemsService {
-  delete(userId, tripItemId) {
-    throw new Error("Method not implemented.")
-  }
   async getAllTripItems(accountId) {
     const tripItems = await dbContext.TripItems.find({ accountId })
 
@@ -49,7 +46,7 @@ class TripItemsService {
 
     if (tripItem.quantity <= 0) {
       await tripItem.delete()
-      return `Your ${tripItem.name} has been deleted`
+      return `Your TripItem has been deleted`
     } else {
       await tripItem.save()
       return `Your ${tripItem.name} las been decreased to a quantity of ${tripItem.quantity}`
@@ -64,6 +61,18 @@ class TripItemsService {
     await dbContext.TripItems.deleteMany({ accountId: accountId })
   }
 
+  async delete(userId, tripItemId) {
+    const tripItem = await dbContext.TripItems.findById(tripItemId)
+    if (tripItem == null) {
+      throw new BadRequest("That TripItem does not exist")
+    }
+
+    if (tripItem.accountId != userId) {
+      throw new Forbidden(`You are not authorized to delete this TripItem`)
+    }
+    await tripItem.delete()
+    return `Your ${tripItem.name} has been deleted`
+  }
 }
 
 export const tripItemsService = new TripItemsService()

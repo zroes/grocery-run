@@ -40,6 +40,28 @@ class TripService {
     AppState.tripItems = []
     logger.log(AppState.tripItems, res.data)
   }
+
+  async deleteTripItem(itemId) {
+    await api.delete(`api/tripItems/${itemId}`)
+    AppState.tripItems = AppState.tripItems.filter(t => t.id != itemId)
+  }
+
+  async increaseQuantity(itemId) {
+    const res = await api.put(`api/tripItems/${itemId}`)
+    const itemIndex = AppState.tripItems.findIndex(t => t.id == itemId)
+    AppState.tripItems.splice(itemIndex, 1, new tripItem(res.data))
+  }
+
+  async decreaseQuantityOrDelete(itemId) {
+    const res = await api.delete(`api/tripItems/${itemId}`)
+
+    if (res.data == `Your TripItem has been deleted`) {
+      AppState.tripItems = AppState.tripItems.filter(t => t.id != itemId)
+    } else {
+      const itemIndex = AppState.tripItems.findIndex(t => t.id == itemId)
+      AppState.tripItems.splice(itemIndex, 1, new tripItem(res.data))
+    }
+  }
 }
 
 
