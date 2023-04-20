@@ -23,13 +23,14 @@
               </div>
             </div>
             <div>
-              <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"> <i
-                  class="mdi mdi-chevron-up"></i> </div>
+              <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"
+                @click="increaseQuantity(item)"> <i class="mdi mdi-chevron-up"></i> </div>
 
               <div title="Decrease Quantity" class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"
-                v-if="item?.quantity > 1"> <i class="mdi mdi-chevron-down"></i> </div>
-              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else> <i
-                  class="mdi mdi-delete-outline"></i> </div>
+                v-if="item?.quantity > 1" @click="decreaseQuantityOrDelete(item)"> <i class="mdi mdi-chevron-down"></i>
+              </div>
+              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else
+                @click="decreaseQuantityOrDelete(item)"> <i class="mdi mdi-delete-outline"></i> </div>
             </div>
           </div>
 
@@ -39,8 +40,6 @@
 </template>
 
 <script>
-import { computed } from "vue"
-import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import { tripItem } from "../models/SearchResult.js"
@@ -54,6 +53,7 @@ export default {
   setup() {
     // private variables and methods here
     return {
+
       async editItemChoice(item) {
         try {
           const query = item.query
@@ -61,12 +61,30 @@ export default {
             router.push({ name: 'SearchResults', params: { searchQuery: query, sortType: "price" } })
             await tripService.deleteTripItem(item.id)
           }
+        } catch (error) {
+          logger.error(error.message);
+          Pop.error(error.message);
+        }
+      },
 
+      async increaseQuantity(item) {
+        try {
+          await tripService.increaseQuantity(item.id)
+        } catch (error) {
+          logger.error(error.message);
+          Pop.error(error.message);
+        }
+      },
+
+      async decreaseQuantityOrDelete(item) {
+        try {
+          await tripService.decreaseQuantityOrDelete(item.id)
         } catch (error) {
           logger.error(error.message);
           Pop.error(error.message);
         }
       }
+
     }
   },
 }

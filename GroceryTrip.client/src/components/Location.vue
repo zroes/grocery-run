@@ -1,5 +1,5 @@
 <template>
-  <div v-if="items.length != 0" class="d-flex justify-content-between mb-3">
+  <div v-if="items?.length != 0" class="d-flex justify-content-between mb-3">
     <div class="col-5 my-2">
       <img class="logo" :src="location?.logo" alt="Fred Meyer">
     </div>
@@ -16,15 +16,13 @@
 <script>
 import { computed } from "vue"
 import { AppState } from "../AppState.js"
-import { logger } from "../utils/Logger.js"
-import Pop from "../utils/Pop.js"
 import { StoreLocation } from "../models/StoreLocation.js"
 import StoreTripCard from "./StoreTripCard.vue"
 
 
 export default {
   props: {
-    location: { type: StoreLocation, required: true }
+    location: { type: Object, required: true }
   },
   setup(props) {
     // private variables and methods here

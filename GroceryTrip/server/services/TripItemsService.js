@@ -46,7 +46,7 @@ class TripItemsService {
 
     if (tripItem.quantity <= 0) {
       await tripItem.delete()
-      return `Your ${tripItem.name} has been deleted`
+      return `Your TripItem has been deleted`
     } else {
       await tripItem.save()
       return `Your ${tripItem.name} las been decreased to a quantity of ${tripItem.quantity}`
