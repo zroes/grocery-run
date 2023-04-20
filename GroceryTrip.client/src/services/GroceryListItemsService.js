@@ -30,7 +30,7 @@ class GroceryListsItemsService {
     const itemToToggle = AppState.activeGroceryListItems.find(item => item.id == itemId)
     itemToToggle.included = !itemToToggle.included
     const res = await api.put('api/groceryItems/' + itemId)
-    logger.log(res.data)
+    // logger.log(res.data)
   }
 
   async sortListResults(body, sortType) {
