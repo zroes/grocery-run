@@ -53,7 +53,7 @@ class TripService {
 
   async decreaseQuantity(item) {
     item.quantity--
-    const res = await api.post(`api/tripItems`, item)
+    const res = await api.put(`api/tripItems`, item)
   }
 }
 
