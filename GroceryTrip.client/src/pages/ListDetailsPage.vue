@@ -3,7 +3,7 @@
   <div v-else class="">
     <h1 class="bigger p-3 text-light">{{ groceryList?.name }}</h1>
     <ul class="container-fluid">
-      <div v-for="(item, index) in groceryListItems" class="row p-2 justify-content-between"
+      <div role="button" v-for="(item, index) in groceryListItems" class="no-select row p-2 justify-content-between"
         :class="{ 'bg-grey': index % 2 == 0 }, { 'opacity-50 bg-dark': !item.included }" @click="toggleInclude(item.id)">
         <div class="filler"></div>
         <li class="text-light d-flex">
@@ -173,13 +173,6 @@ export default {
 </script>
 
 <style scoped>
-.child {
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-  /* background-color: #dc3545;
-  color: #f7f5f5; */
-}
-
 .excluded {
   height: 5px;
   /* opacity: 0; */
@@ -190,10 +183,5 @@ export default {
 
 .filler {
   height: 5px;
-}
-
-.parent:hover .child {
-  opacity: 100;
-
 }
 </style>

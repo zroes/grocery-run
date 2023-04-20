@@ -23,6 +23,7 @@ class TripItemsService {
     }
 
     tripItem.quantity = tripItemData.quantity || tripItem.quantity
+    tripItem.included = tripItemData.included || !tripItem.included
 
     await tripItem.save()
 

@@ -12,5 +12,6 @@ export const TripItemSchema = new Schema({
   query: { type: String, required: true },
   store: { type: String, required: true, minLength: 3, maxLength: 100 },
   accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
+  included: { type: Boolean, required: true, default: true },
 }, { timestamps: true, toJSON: { virtuals: true } })
 

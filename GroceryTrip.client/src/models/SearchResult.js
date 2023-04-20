@@ -19,5 +19,6 @@ export class tripItem extends SearchResult {
     this.id = data.id
     this.accountId = data.accountId
     this.quantity = data.quantity
+    this.included = data.included
   }
 }

@@ -55,6 +55,11 @@ class TripService {
     item.quantity--
     const res = await api.put(`api/tripItems`, item)
   }
+
+  async toggleInclude(item) {
+    item.included = !item.included
+    const res = await api.put('api/tripItems', item)
+  }
 }
 
 
