@@ -4,6 +4,7 @@
 
 import { dbContext } from "../db/DbContext.js"
 import { Kroger } from "./AxiosService.js"
+import { Albertsons } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
 // stack overflow special
@@ -33,15 +34,36 @@ function toRad(Value) {
 
 
 class StoreLocationsService {
-  async addLocations(latLong, accountId) {
+  async addAlbertsonsLocations(latLong, accountId) {
+    const res = await Albertsons.get('/storeresolver/v2/all', {
+      params: {
+        'latitude': latLong.lat,
+        'longitude': latLong.long,
+        'excludeBanners': 'none'
+      }
+    })
+    const savedLocations = []
+    const parsedLocations = JSON.parse(res.data).instore.stores
+    for (let i = 0; i < 2; i++) {
+      const elem = parsedLocations[i]
+      elem.name = `${elem.domainName} - ${elem.address.line1}`
+      elem.logo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Albertsons_logo.svg/2560px-Albertsons_logo.svg.png'
+      elem.accountId = accountId
+      savedLocations.push(await dbContext.StoreLocations.create(elem))
+    }
+    return savedLocations
+  }
+
+
+  async addKrogerLocations(latLong, accountId) {
     let token = await krogerAuthorizationService.getAuthorization()
 
     const res = await Kroger.get('locations', {
       headers:
-        { 'Authorization': `Bearer ${token}` },
+        { 'Authorization': `Bearer ${token} ` },
 
       params: {
-        'filter.latLong.near': `${latLong.lat},${latLong.long}`
+        'filter.latLong.near': `${latLong.lat},${latLong.long} `
       }
     })
     // return locations
@@ -49,6 +71,7 @@ class StoreLocationsService {
     let distance
     let savedLocations = []
     await dbContext.StoreLocations.deleteMany({ accountId: accountId })
+    // NOTE this is how we would grab more than 2 locations
     for (let i = 0; i < 2; i++) {
       const element = parsedLocations.data[i]
       distance = getDistance(
@@ -57,6 +80,7 @@ class StoreLocationsService {
       element.distance = distance
       element.accountId = accountId
       element.logo = element.name.includes('Fred Meyer') ? "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Fred_Meyer_logo.svg/2560px-Fred_Meyer_logo.svg.png" : "../assets/img/GenericCompanyPic.png"
+      element.name = 'Kroger:' + element.name
       savedLocations.push(await dbContext.StoreLocations.create(element))
     }
     return savedLocations
