@@ -14,7 +14,7 @@
 
           <div class="col-2 p-0 my-3">
             <button class="btn text-primary border border-primary itemBtn" @click.stop="editItemChoice(item)"
-              v-if="item.included">Edit</button>
+              :class="{ 'hide': !item.included }">Edit</button>
           </div>
 
           <div class="col-6 d-flex justify-content-end">
@@ -26,17 +26,19 @@
             </div>
             <div>
 
+              <!-- :class="{ 'order-3': !item.included }, { 'order-2': item.included }" -->
+
               <div title="Increase Quantity" class="py-1 px-2 bg-light text-dark rounded mb-1 itemBtn"
-                @click.stop="increaseQuantity(item)" v-if="item.included">
+                @click.stop="increaseQuantity(item)" :class="{ 'hide': !item.included }">
                 <i class="mdi mdi-chevron-up"></i>
               </div>
 
               <div title="Decrease Quantity" class="py-1 px-2 bg-light text-dark rounded mt-1 itemBtn"
-                v-if="item?.quantity > 1 && item.included" @click.stop="decreaseQuantityOrDelete(item)"
-                :disabled="!item.included"> <i class="mdi mdi-chevron-down"></i>
+                v-if="item?.quantity > 1" @click.stop="decreaseQuantityOrDelete(item)"
+                :class="{ 'hide': !item.included }"> <i class="mdi mdi-chevron-down"></i>
               </div>
-              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn"
-                v-else-if="item.included" @click.stop="decreaseQuantityOrDelete(item)"> <i
+              <div title="Delete Item" class="py-1 px-2 bg-light text-danger rounded mt-1 itemBtn" v-else
+                @click.stop="decreaseQuantityOrDelete(item)" :class="{ 'hide': !item.included }"> <i
                   class="mdi mdi-delete-outline"></i> </div>
             </div>
           </div>
@@ -128,5 +130,9 @@ export default {
 
 .filler {
   height: 5px;
+}
+
+.hide {
+  visibility: hidden;
 }
 </style>
