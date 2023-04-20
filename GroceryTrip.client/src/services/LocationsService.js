@@ -7,8 +7,11 @@ class LocationsService {
   async sendLatLong(coords) {
     logger.log(coords)
     const res = await api.post('api/location', coords)
-    AppState.account.krogerLocations = res.data.map(l => new StoreLocation(l))
     logger.log(res.data)
+    // NOTE we want to add something to differentiate between fred meyer and other kroger stores
+    const albertsonsLocations = res.data.filter(store => store.name.includes('Albertsons'))
+    const krogerLocations = res.data.filter(store => store.name.includes('Kroger'))
+    // AppState.account.krogerLocations = krogerLocations.map(l => new StoreLocation(l))
   }
 }
 
