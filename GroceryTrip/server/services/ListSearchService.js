@@ -20,6 +20,7 @@ class ListSearchService {
           'filter.locationId': locations[0].locationId,
           // 'filter.term': q
           'filter.term': q,
+          'filter.fulfillment': 'ais',
           // 'filter.limit': '1'
         }
       })
@@ -61,6 +62,7 @@ class ListSearchService {
         {
           'filter.locationId': locations[1].locationId,
           'filter.term': q,
+          'filter.fulfillment': 'ais',
         }
       })
       promises1.push(prom)
