@@ -3,6 +3,9 @@ import { Kroger } from "./AxiosService.js"
 import { krogerAuthorizationService } from "./KrogerAuthorizationService.js"
 
 class SearchService {
+  getAlbertsonsSearch(query, locations) {
+
+  }
   // FIXME refactor later (need to do the front end too)
   async getKrogerSearch(query, locations) {
     let token = await krogerAuthorizationService.getAuthorization()

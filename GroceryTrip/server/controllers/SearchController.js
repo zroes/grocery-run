@@ -8,16 +8,18 @@ export class SearchController extends BaseController {
   constructor() {
     super('api/search')
     this.router
-      .post('', this.getKrogerSearch)
+      .post('', this.getSearchResults)
       .post('/trips', this.manySearch)
   }
-  async getKrogerSearch(req, res, next) {
+  async getSearchResults(req, res, next) {
     try {
       const query = req.body.query
       const locations = req.body.locations
-      let searchResults = await searchService.getKrogerSearch(query, locations)
+      let krogerResults = await searchService.getKrogerSearch(query, locations)
+      // let albertsonsResults = await searchService.getAlbertsonsSearch(query, locations)
       // let modeledSearchResults = searchResults.data.map(s => new SearchItem(s))
-      return res.send(searchResults)
+      // let searchResults = krogerResults.concat(albertsonsResults)
+      res.send(krogerResults)
     }
     catch (error) {
       next(error)

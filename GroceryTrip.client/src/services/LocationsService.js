@@ -11,7 +11,7 @@ class LocationsService {
     // NOTE we want to add something to differentiate between fred meyer and other kroger stores
     const albertsonsLocations = res.data.filter(store => store.name.includes('Albertsons'))
     const krogerLocations = res.data.filter(store => store.name.includes('Kroger'))
-    // AppState.account.krogerLocations = krogerLocations.map(l => new StoreLocation(l))
+    AppState.account.krogerLocations = krogerLocations.map(l => new StoreLocation(l))
   }
 }
 
