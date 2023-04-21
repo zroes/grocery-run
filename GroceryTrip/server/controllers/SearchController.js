@@ -32,9 +32,14 @@ export class SearchController extends BaseController {
       const locations = req.body.locations
       const krogerResults = await listSearchService.getItemsFromListForTrip(query, locations)
       const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations)
+      const results = {}
+      query.forEach(q => {
+        results[q] = albertsonsResults[q]
+        results[q].concat(krogerResults[q]) // not working
+      })
       // TODO combine results from these two apis
       // const results = krogerResults.concat(albertsonsResults)
-      return res.send(albertsonsResults)
+      return res.send(results)
     }
     catch (error) {
       next(error)
