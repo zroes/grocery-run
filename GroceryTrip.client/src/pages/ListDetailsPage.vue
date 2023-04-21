@@ -150,7 +150,7 @@ export default {
           AppState.activeGroceryListItems.forEach(item => {
             itemsToSend.push(item.name)
           })
-          const locations = AppState.account.krogerLocations
+          const locations = AppState.account.locations
           const body = { query: itemsToSend, locations: locations }
           // debugger 
           const sortType = await Pop.filterButtons()

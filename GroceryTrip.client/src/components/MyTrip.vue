@@ -32,7 +32,7 @@ export default {
       getMyTripItems()
     })
     return {
-      locations: computed(() => AppState.account.krogerLocations),
+      locations: computed(() => AppState.account.locations),
       tripItems: computed(() => AppState.tripItems),
       async clearTrip() {
         if (await Pop.confirm("Are you sure you want to clear this trip? This can't be undone"))

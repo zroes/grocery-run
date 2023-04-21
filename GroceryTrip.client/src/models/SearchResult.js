@@ -6,7 +6,7 @@ export class SearchResult {
     this.price = data.price
     this.size = data.size
     this.locationId = data.locationId
-    this.distance = data.distance || AppState.account.krogerLocations.find(l => l.locationId == data.locationId).distance
+    this.distance = data.distance || AppState.account.locations.find(l => l.locationId == data.locationId).distance
     this.store = data.store
     this.image = data.image
     this.query = data.query

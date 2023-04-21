@@ -85,7 +85,7 @@ export default {
       try {
         const search = {
           query: [route.params.searchQuery],
-          locations: AppState.account.krogerLocations
+          locations: AppState.account.locations
         }
         await searchesService.getSearchResults(search);
       }
