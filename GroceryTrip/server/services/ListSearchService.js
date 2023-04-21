@@ -100,7 +100,7 @@ class ListSearchService {
         },
         params:
         {
-          "request-id": "7431682031384082265",   //FIXME replace request id manually
+          "request-id": "8151682092114208676",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
@@ -130,7 +130,7 @@ class ListSearchService {
 
         // for (let j = 0; j < parsedRes0[i].length; j++) {
         let item = parsedRes0[i]
-        item.image = 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2014%2F07%2F10%2Fpepperoni-pizza-ck-x.jpg&q=60'
+        item.image = `//images.albertsons-media.com/is/image/ABS/${item.pid}?$ecom-product-card-mobile-jpg$&defaultImage=Not_Available`
         item.size = `${item.unitQuantity} ${item.unitOfMeasure}`
         item.locationId = locations[3].locationId
         item.store = "Albertsons"
