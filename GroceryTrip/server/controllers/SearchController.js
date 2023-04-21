@@ -34,8 +34,11 @@ export class SearchController extends BaseController {
       const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations)
       const results = {}
       query.forEach(q => {
-        results[q] = albertsonsResults[q]
-        results[q].concat(krogerResults[q]) // not working
+        results[q] = krogerResults[q]
+        for (let i = 0; i < albertsonsResults[q].length; i++) {
+          results[q].push(albertsonsResults[q][i])
+        }
+        // results[q].concat(krogerResults[q]) // not working
       })
       // TODO combine results from these two apis
       // const results = krogerResults.concat(albertsonsResults)
