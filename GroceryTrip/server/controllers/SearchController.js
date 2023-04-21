@@ -34,7 +34,7 @@ export class SearchController extends BaseController {
       const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations)
       // TODO combine results from these two apis
       // const results = krogerResults.concat(albertsonsResults)
-      return res.send(krogerResults)
+      return res.send(albertsonsResults)
     }
     catch (error) {
       next(error)
