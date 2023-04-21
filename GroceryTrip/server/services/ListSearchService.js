@@ -100,7 +100,7 @@ class ListSearchService {
         },
         params:
         {
-          "request-id": "1461682093248942839",   //FIXME replace request id manually
+          "request-id": "9981682095264863985",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
@@ -122,21 +122,29 @@ class ListSearchService {
       promises0.push(prom)
     })
     const raw0 = await Promise.all(promises0)
-    const parsedRes0 = raw0.map(r => JSON.parse(r.data))['0'].primaryProducts.response.docs
+    const parsedRes0 = raw0.map(r => JSON.parse(r.data))
+    const mappedRes0 = []
+    parsedRes0.forEach(r => {
+      const res = r.primaryProducts.response.docs
+      mappedRes0.push(res)
+    })
+    //['0'].primaryProducts.response.docs
 
-    for (let j = 0; j < query.length; j++) {
-      obj[query[j]] = []
-      for (let i = 0; i < parsedRes0.length; i++) {
+
+
+    for (let i = 0; i < query.length; i++) {
+      obj[query[i]] = []
+      for (let j = 0; j < mappedRes0[i].length; j++) {
 
         // for (let j = 0; j < parsedRes0[i].length; j++) {
-        let item = parsedRes0[i]
+        let item = mappedRes0[i][j]
         item.image = `//images.albertsons-media.com/is/image/ABS/${item.pid}?$ecom-product-card-mobile-jpg$&defaultImage=Not_Available`
         item.size = `${item.unitQuantity} ${item.unitOfMeasure}`
         item.locationId = locations[3].locationId
         item.store = "Albertsons"
         item.distance = locations[3].distance
-        item.query = query[j]
-        obj[query[j]].push(item)
+        item.query = query[i]
+        obj[query[i]].push(item)
       }
     }
 

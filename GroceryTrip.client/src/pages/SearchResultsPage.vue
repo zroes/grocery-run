@@ -70,16 +70,15 @@ export default {
       }
     })
 
-
     watchEffect(() => {
       route.params
       sortSearchResults();
     })
 
-    watchEffect(() => {
-      route.params
-      getSearchResults();
-    })
+    // watchEffect(() => {
+    //   route.params
+    //   getSearchResults();
+    // })
 
 
     async function getSearchResults() {

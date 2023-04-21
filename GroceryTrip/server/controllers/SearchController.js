@@ -38,10 +38,8 @@ export class SearchController extends BaseController {
         for (let i = 0; i < albertsonsResults[q].length; i++) {
           results[q].push(albertsonsResults[q][i])
         }
-        // results[q].concat(krogerResults[q]) // not working
+
       })
-      // TODO combine results from these two apis
-      // const results = krogerResults.concat(albertsonsResults)
       return res.send(results)
     }
     catch (error) {

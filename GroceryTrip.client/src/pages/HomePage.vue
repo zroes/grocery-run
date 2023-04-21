@@ -29,9 +29,15 @@ import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState.js"
 import MyTrip from "../components/MyTrip.vue"
 import Loading from "../components/Loading.vue"
+import { onMounted } from "vue"
 
 export default {
   setup() {
+
+    onMounted(() => {
+      AppState.searchResults = []
+      AppState.unsortedSearchResults = []
+    })
     return {
       sortType: 'price',
       loading: computed(() => AppState.loading),
