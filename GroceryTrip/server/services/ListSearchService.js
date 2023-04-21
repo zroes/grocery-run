@@ -100,7 +100,7 @@ class ListSearchService {
         },
         params:
         {
-          "request-id": "6131682116060400806",   //FIXME replace request id manually
+          "request-id": "5191682117050864534",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
@@ -128,12 +128,15 @@ class ListSearchService {
       const res = r.primaryProducts.response.docs
       mappedRes0.push(res)
     })
-    //['0'].primaryProducts.response.docs
+
 
 
 
     for (let i = 0; i < query.length; i++) {
       obj[query[i]] = []
+      if (mappedRes0[0] == undefined) {
+        return obj
+      }
       for (let j = 0; j < mappedRes0[i].length; j++) {
 
         // for (let j = 0; j < parsedRes0[i].length; j++) {
