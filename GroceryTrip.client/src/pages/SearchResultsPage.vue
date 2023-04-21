@@ -53,7 +53,7 @@ import { useRoute } from 'vue-router';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { router } from '../router';
-import { watchEffect, computed } from 'vue';
+import { watchEffect, computed, onMounted } from 'vue';
 import { searchesService } from '../services/SearchesService';
 import { AppState } from '../AppState';
 import SearchResultsItemsCard from '../components/SearchResultsItemCard.vue'
@@ -62,27 +62,28 @@ import Loading from '../components/Loading.vue'
 
 export default {
   setup() {
-    const route = useRoute();
+    let route = useRoute();
 
     watchEffect(() => {
-      if (AppState.account.id) {
+      if (AppState.account.id && AppState.activeQuery != route.params.searchQuery) {
         getSearchResults();
       }
     })
 
     watchEffect(() => {
-      route.params
+      route.params.sortType
       sortSearchResults();
     })
 
-    // watchEffect(() => {
-    //   route.params
-    //   getSearchResults();
-    // })
+    watchEffect(() => {
+      route.params
+      AppState.searchResults = [];
+    })
 
 
     async function getSearchResults() {
       try {
+        AppState.activeQuery = route.params.searchQuery
         const search = {
           query: [route.params.searchQuery],
           locations: AppState.account.locations
@@ -99,6 +100,7 @@ export default {
 
     async function sortSearchResults() {
       try {
+        logger.log("Sorting")
         await searchesService.sortSearchResults(route.params.sortType);
       } catch (error) {
         logger.error(error.message);
@@ -115,7 +117,7 @@ export default {
 
       async setSortType(newSortType) {
         try {
-          router.push({ name: 'SearchResults', params: { searchQuery: route.params.searchQuery, sortType: newSortType } })
+          router.replace({ name: 'SearchResults', params: { searchQuery: route.params.searchQuery, sortType: newSortType } })
           if (newSortType == 'distance') {
             this.priceCheck = false
             this.distanceCheck = true
