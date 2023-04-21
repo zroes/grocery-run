@@ -100,7 +100,7 @@ class ListSearchService {
         },
         params:
         {
-          "request-id": "1621682111111279664",   //FIXME replace request id manually
+          "request-id": "6131682116060400806",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
@@ -139,7 +139,7 @@ class ListSearchService {
         // for (let j = 0; j < parsedRes0[i].length; j++) {
         let item = mappedRes0[i][j]
         item.image = `//images.albertsons-media.com/is/image/ABS/${item.pid}?$ecom-product-card-mobile-jpg$&defaultImage=Not_Available`
-        item.size = `${item.unitQuantity} ${item.unitOfMeasure}`
+        item.size = `${item.unitQuantity}`
         item.locationId = locations[3].locationId
         item.store = "Albertsons"
         item.distance = locations[3].distance
