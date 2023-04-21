@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js"
+import { SearchResult } from "../models/SearchResult.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { searchesService } from "./SearchesService.js"
@@ -38,12 +39,13 @@ class GroceryListsItemsService {
     const results = await searchesService.searchList(body)
     AppState.loading = false
     let pickedItems = []
+    logger.log(results)
 
     let resultKeys = body.query
 
     for (let i = 0; i < resultKeys.length; i++) {
-
-      let unsortedResults = results[resultKeys[i]].filter(r => r.price != null)
+      const modeledRes = results[resultKeys[i]].map(i => new SearchResult(i))
+      let unsortedResults = modeledRes.filter(r => r.price != null)
 
       if (sortType == "price") {
         const sortedResults = unsortedResults.sort((a, b) => a.price - b.price)
