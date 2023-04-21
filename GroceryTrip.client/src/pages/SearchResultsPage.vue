@@ -75,10 +75,11 @@ export default {
       sortSearchResults();
     })
 
-    // watchEffect(() => {
-    //   route.params
-    //   getSearchResults();
-    // })
+    watchEffect(() => {
+      route.params
+      AppState.searchResults = [];
+      AppState.unsortedSearchResults = [];
+    })
 
 
     async function getSearchResults() {
