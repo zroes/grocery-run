@@ -36,7 +36,6 @@ export default {
 
     onMounted(() => {
       AppState.searchResults = []
-      AppState.unsortedSearchResults = []
     })
     return {
       sortType: 'price',

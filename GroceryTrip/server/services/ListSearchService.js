@@ -100,7 +100,7 @@ class ListSearchService {
         },
         params:
         {
-          "request-id": "8721682100549195358",   //FIXME replace request id manually
+          "request-id": "1621682111111279664",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
