@@ -8,8 +8,10 @@
         <h6>
           <img class="img-fluid logo me-2" width="90" src="../assets/img/fredmeyer logo.png" alt="Fred Meyer"
             v-if="r.store?.includes('FRED MEYER')">
-          <img class="img-fluid logo me-2" width="80" src="../assets/img/GenericCompanyPic.png" alt="Generic"
-            v-if="r?.store == null">
+          <img class="img-fluid logo me-2" width="90"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Albertsons_logo.svg/2560px-Albertsons_logo.svg.png"
+            alt="Generic" v-if="r.store?.includes('Albertsons')">
+          <img class="img-fluid logo me-2" width="80" src="../assets/img/GenericCompanyPic.png" alt="Generic" v-else>
           <span v-if="r?.distance">{{ r?.distance + ' Miles' }}</span> <span v-else> 0 Miles </span>
         </h6>
         <h5>{{ '$' + r?.price.toFixed(2) }}</h5>
