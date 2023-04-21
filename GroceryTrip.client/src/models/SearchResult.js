@@ -2,7 +2,6 @@ import { AppState } from "../AppState.js"
 
 export class SearchResult {
   constructor(data) {
-    this.brand = data.brand
     this.name = data.name
     this.price = data.price
     this.size = data.size
