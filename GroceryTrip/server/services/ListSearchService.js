@@ -96,7 +96,7 @@ class ListSearchService {
       const prom = Albertsons.get('/pgmsearch/v1/search/products', {
         headers:
         {
-          "ocp-apim-subscription-key": "5e790236c84e46338f4290aa1050cdd4"
+          "ocp-apim-subscription-key": "1731682124712402673"
         },
         params:
         {
