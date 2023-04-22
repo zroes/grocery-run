@@ -11,12 +11,12 @@
     </button>
 
     <div class="offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-      <div class="offcanvas-header">
+      <div class="offcanvas-header pb-0">
         <h5 class="offcanvas-title" id="offcanvasTopLabel">Account</h5>
         <button type="button" class="navbar-toggler" data-bs-dismiss="offcanvas" aria-label="Close"><span
             class="navbar-toggler-icon"></span></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body pt-0">
         <Login />
       </div>
     </div>

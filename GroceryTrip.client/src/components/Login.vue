@@ -5,23 +5,21 @@
       Login
     </button>
     <div v-else>
-      <div class="dropdown dropstart my-2 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
-          <div v-if="account.picture || user.picture" class="">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
-          </div>
+      <div class="my-2 my-lg-0 text-center">
+        <div v-if="account.picture || user.picture" class="mb-1">
+          <img :src="account.picture || user.picture" alt="" height="60" class="rounded" />
         </div>
-        <div class="dropdown-menu- dropdown-menu-lg-right p-0" aria-labelledby="authDropdown">
-          <div class="list-group">
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item dropdown-item list-group-item-action">
-                Manage Account
-              </div>
-            </router-link>
-            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
+        <div class="d-flex flex-column">
+          <router-link :to="{ name: 'Account' }">
+            <button class="btn btn-warning wide my-1">
+              Manage Account
+            </button>
+          </router-link>
+          <div>
+            <button class="btn btn-danger wide text-dark my-1" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -49,4 +47,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.wide {
+  width: 100%;
+}
+</style>
