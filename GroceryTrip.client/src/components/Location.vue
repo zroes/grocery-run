@@ -1,5 +1,5 @@
 <template>
-  <div v-if="items?.length != 0" class="d-flex justify-content-between mb-3">
+  <div v-if="items?.length != 0" class="d-flex justify-content-between mb-3 px-md-2">
     <div class="col-5 my-2">
       <img class="logo" :src="location?.logo" alt="Fred Meyer">
     </div>
