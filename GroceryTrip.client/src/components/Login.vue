@@ -48,7 +48,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wide {
-  width: 100%;
+@media (max-width: 576px) {
+  .wide {
+    width: 100%;
+  }
+
 }
 </style>
