@@ -148,7 +148,9 @@ export default {
         try {
           const itemsToSend = []
           AppState.activeGroceryListItems.forEach(item => {
-            itemsToSend.push(item.name)
+            if (item.included) {
+              itemsToSend.push(item.name)
+            }
           })
           const locations = AppState.account.locations
           const body = { query: itemsToSend, locations: locations }
