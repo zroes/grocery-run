@@ -96,11 +96,11 @@ class ListSearchService {
       const prom = Albertsons.get('/pgmsearch/v1/search/products', {
         headers:
         {
-          "ocp-apim-subscription-key": "1731682124712402673"
+          "ocp-apim-subscription-key": "5e790236c84e46338f4290aa1050cdd4"
         },
         params:
         {
-          "request-id": "6141682120398530707",   //FIXME replace request id manually
+          "request-id": "1731682124712402673",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
