@@ -19,7 +19,7 @@
       <h6>{{ r?.name }}</h6>
       <div class="d-flex justify-content-between">
         <h6 class="d-flex align-items-center m-0">{{ r?.size }}</h6>
-        <button class="btn-warning rounded" @click="createTripItem(r)" v-if="account.id">Add to Trip</button>
+        <button class="btn-warning rounded fw-custom" @click="createTripItem(r)" v-if="account.id">Add to Trip</button>
       </div>
     </div>
   </div>
@@ -63,6 +63,10 @@ export default {
 .itemPic {
   max-width: 24vw;
   height: 12vh;
+}
+
+.fw-custom {
+  font-weight: 500;
 }
 
 .logo {

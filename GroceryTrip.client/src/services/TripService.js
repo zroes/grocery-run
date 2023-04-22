@@ -6,10 +6,11 @@ import { api } from "./AxiosService.js"
 class TripService {
   async createTripItem(selectedSearchResult) {
     let res
-    const foundItem = AppState.tripItems.find(item => item.name == selectedSearchResult.name)
+    const foundItems = AppState.tripItems.filter(item => item.name == selectedSearchResult.name)
+    const foundItem = foundItems.find(item => item.locationId == selectedSearchResult.locationId)
     if (foundItem) {
-      res = await api.put('api/tripItems/' + foundItem.id)
       foundItem.quantity++
+      res = await api.put('api/tripItems', foundItem)
     }
     else {
       res = await api.post(`api/tripItems`, selectedSearchResult)
