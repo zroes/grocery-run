@@ -1,17 +1,24 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 border-success border-bottom border-4">
+  <nav class="navbar navbar-dark bg-dark px-3 border-success border-bottom border-4">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/logo2.png" height="45" />
       </div>
     </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
+      aria-controls="offcanvasTop">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
+
+    <div class="offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <div class="offcanvas-header pb-0">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Account</h5>
+        <button type="button" class="navbar-toggler" data-bs-dismiss="offcanvas" aria-label="Close"><span
+            class="navbar-toggler-icon"></span></button>
+      </div>
+      <div class="offcanvas-body pt-0">
+        <Login />
+      </div>
     </div>
   </nav>
 </template>
@@ -43,7 +50,7 @@ a:hover {
 
 @media screen and (min-width: 768px) {
   nav {
-    height: 64px;
+    height: 70px;
   }
 }
 </style>

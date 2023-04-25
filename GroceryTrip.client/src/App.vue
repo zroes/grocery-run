@@ -3,15 +3,21 @@
     <Navbar />
   </header>
   <main>
-    <!-- <h1 class="p-4 bg-primary"> Test!</h1>
-    <h1 class="p-4 bg-secondary"> Test!</h1>
-    <h1 class="p-4 bg-grey"> Test!</h1>
-    <h1 class="p-4 bg-dark"> Test!</h1>
-    <h1 class="p-4 bg-light"> Test!</h1>
-    <h1 class="p-4 bg-warning"> Test!</h1>
-    <h1 class="p-4 bg-danger"> Test!</h1>
-    <h1 class="p-4 bg-success"> Test!</h1> -->
-    <router-view />
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-5 m-0 p-0">
+          <!-- <h1 class="p-4 bg-primary"> Test!</h1>
+            <h1 class="p-4 bg-secondary"> Test!</h1>
+            <h1 class="p-4 bg-grey"> Test!</h1>
+            <h1 class="p-4 bg-dark"> Test!</h1>
+            <h1 class="p-4 bg-light"> Test!</h1>
+            <h1 class="p-4 bg-warning"> Test!</h1>
+            <h1 class="p-4 bg-danger"> Test!</h1>
+            <h1 class="p-4 bg-success"> Test!</h1> -->
+          <router-view />
+        </div>
+      </div>
+    </div>
   </main>
   <footer class="bg-dark text-light">
     •••
