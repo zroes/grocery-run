@@ -59,6 +59,9 @@
       "titleBar.inactiveBackground": "#4d3d3899",
       "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#4d3d38"
+    "peacock.color": "#4d3d38",
+    "cSpell.words": [
+      "Albertsons"
+    ]
   }
 }
