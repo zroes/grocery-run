@@ -31,15 +31,16 @@ export class SearchController extends BaseController {
       const query = req.body.query
       const locations = req.body.locations
       const krogerResults = await listSearchService.getItemsFromListForTrip(query, locations)
-      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations)
+      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations[3])
       const results = {}
-      query.forEach(q => {
-        results[q] = krogerResults[q]
-        for (let i = 0; i < albertsonsResults[q].length; i++) {
-          results[q].push(albertsonsResults[q][i])
-        }
+      if (albertsonsResults[0] == undefined)
+        query.forEach(q => {
+          results[q] = krogerResults[q]
+          for (let i = 0; i < albertsonsResults[q].length; i++) {
+            results[q].push(albertsonsResults[q][i])
+          }
 
-      })
+        })
       return res.send(results)
     }
     catch (error) {
@@ -47,5 +48,25 @@ export class SearchController extends BaseController {
     }
   }
 
+  async manySearchRefactored(req, res, next) {
+    try {
+      const query = req.body.query
+      const kLocations = req.body.locations.slice(0, 2)
+      const krogerResults = await listSearchService.getItemsFromListForTrip(query, kLocations)
+      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, req.body.locations[3])
+      const results = {}
+      if (albertsonsResults[0] == undefined)
+        query.forEach(q => {
+          results[q] = krogerResults[q]
+          for (let i = 0; i < albertsonsResults[q].length; i++) {
+            results[q].push(albertsonsResults[q][i])
+          }
 
+        })
+      return res.send(results)
+    }
+    catch (error) {
+      next(error)
+    }
+  }
 }
