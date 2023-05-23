@@ -7,6 +7,18 @@ class RefactoredSearchService {
 
     const kRes = await getKrogerResults(query, locations)
     const aRes = await getAlbertsonsResults(query, locations)
+    let res = {}
+    if (kRes) {
+      kRes.forEach(k => {
+        res.push(k)
+      })
+    }
+    if (aRes) {
+      aRes.forEach(a => {
+        res.push(a)
+      })
+    }
+    return res
   }
 }
 
