@@ -13,17 +13,51 @@ class RefactoredSearchService {
 
 export const refactoredSearchService = new RefactoredSearchService()
 
-function getKrogerResults(query, locations) {
+async function getKrogerResults(query, locations) {
   let promises = []
   let locationIds = []
   let item = {}
+  const token = await krogerAuthorizationService.getAuthorization()
 
   for (let i = 0; i < locations.length; i++) {
     let l = locations[i]
     query.forEach(q => {
+      const prom = Kroger.get('products', {
+        headers:
+        {
+          'Authorization': `Bearer ${token}`
+        },
+        params:
+        {
+          'filter.locationId': locations[0].locationId,
+          // 'filter.term': q
+          'filter.term': q,
+          // 'filter.fulfillment': 'ais',
+          // 'filter.limit': '1'
+        }
+
+      })
+      promises.push(prom)
+      locationIds.push(locations[i])
+
 
     })
   }
+  const raw = await Promise.all(promises)
+  if (raw[0] == undefined) {
+    return null
+  }
+  const parsedRes = raw.map(r => JSON.parse(r.data))
+  for (let i = 0; i < parsedRes.length; i++) {
+    let r = parsedRes[i]
+    const res = r
+    res.locationId = locationIds[i]
+    res.locationId = locations[0].locationId
+    res.store = "FRED MEYER"
+    res.query = query[i]
+    item[query[i]].push(new SearchItem(res))
+  }
+  return item
 }
 async function getAlbertsonsResults(query, locations) {
   let promises = []
