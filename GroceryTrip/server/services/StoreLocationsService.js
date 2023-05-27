@@ -49,6 +49,7 @@ class StoreLocationsService {
       elem.name = `${elem.domainName} - ${elem.address.line1}`
       elem.logo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Albertsons_logo.svg/2560px-Albertsons_logo.svg.png'
       elem.accountId = accountId
+      elem.store = 'Albertsons'
       savedLocations.push(await dbContext.StoreLocations.create(elem))
     }
     return savedLocations
@@ -81,6 +82,7 @@ class StoreLocationsService {
       element.accountId = accountId
       element.logo = element.name.includes('Fred Meyer') ? "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Fred_Meyer_logo.svg/2560px-Fred_Meyer_logo.svg.png" : "../assets/img/GenericCompanyPic.png"
       element.name = 'Kroger:' + element.name
+      element.store = 'Kroger'
       savedLocations.push(await dbContext.StoreLocations.create(element))
     }
     return savedLocations

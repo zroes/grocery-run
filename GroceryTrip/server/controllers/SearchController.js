@@ -53,7 +53,7 @@ export class SearchController extends BaseController {
     try {
       const query = req.body.query
       const locations = req.body.locations
-      const results = refactoredSearchService.search(query, locations)
+      const results = await refactoredSearchService.search(query, locations)
 
       return res.send(results)
     }
