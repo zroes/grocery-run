@@ -44,7 +44,7 @@ async function getKrogerResults(query, locations) {
       const prom = Kroger.get('products', {
         headers:
         {
-          'Authorization': `Bearer ${token}`
+          0
         },
         params:
         {
