@@ -3,13 +3,14 @@ import { searchService } from "../services/SearchService.js"
 // import { listSearchService } from "../services/ListSearchService.js"
 import { refactoredSearchService } from "../services/RefactoredSearch.js"
 import BaseController from "../utils/BaseController.js"
+import { refactoredSearchService } from "../services/RefactoredSearch.js"
 
 export class SearchController extends BaseController {
   constructor() {
     super('api/search')
     this.router
       // .post('', this.getSearchResults)
-      .post('', this.manySearch)
+      .post('', this.manySearchRefactored)
   }
   async getSearchResults(req, res, next) {
     try {
@@ -51,18 +52,9 @@ export class SearchController extends BaseController {
   async manySearchRefactored(req, res, next) {
     try {
       const query = req.body.query
-      const kLocations = req.body.locations.slice(0, 2)
-      const krogerResults = await listSearchService.getItemsFromListForTrip(query, kLocations)
-      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, req.body.locations[3])
-      const results = {}
-      if (albertsonsResults[0] == undefined)
-        query.forEach(q => {
-          results[q] = krogerResults[q]
-          for (let i = 0; i < albertsonsResults[q].length; i++) {
-            results[q].push(albertsonsResults[q][i])
-          }
+      const locations = req.body.locations
+      const results = await refactoredSearchService.search(query, locations)
 
-        })
       return res.send(results)
     }
     catch (error) {

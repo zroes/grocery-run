@@ -6,6 +6,7 @@ export class StoreLocation {
     this.name = data.name
     // FIXME this might not be good
     this.logo = data.logo
+    this.store = data.store
   }
 }
 

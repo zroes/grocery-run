@@ -6,5 +6,6 @@ export const StoreLocationSchema = new Schema({
   name: { type: String },
   distance: { type: Number },
   accountId: { type: Schema.Types.ObjectId },
-  logo: { type: String }
+  logo: { type: String },
+  store: { type: String }
 }, { timestamps: true, toJSON: { virtuals: true } })
