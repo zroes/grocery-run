@@ -8,7 +8,7 @@
     "debug": "node index.js",
     "start": "node index.js",
     "dev": "node index.js",
-    "setup:server": "cd GroceryTrip && npm ci",
+    "setup:server": "cd GroceryTrip && npm i",
     "setup": "npm install"
   },
   "author": "Codeworks",
