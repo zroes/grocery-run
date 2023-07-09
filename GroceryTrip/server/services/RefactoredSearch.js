@@ -75,11 +75,11 @@ async function getKrogerResults(query, locations) {
     }
     r.data.forEach(res => {
       res.locationId = locationIds[i].locationId
-      res.distance = locations[i].distance
+      res.distance = locationIds[i].distance
       res.store = "FRED MEYER"
       res.query = queryArray[i]
       item[queryArray[i]].push(new SearchItem(res))
-    });
+    })
   }
   return item
 }
@@ -93,7 +93,7 @@ async function getAlbertsonsResults(query, locations) {
       const prom = Albertsons.get('/pgmsearch/v1/search/products', {
         headers: { "ocp-apim-subscription-key": "5e790236c84e46338f4290aa1050cdd4" },
         params: {
-          "request-id": "7391685155999553124",   //FIXME replace request id manually
+          "request-id": "2161688870619290452",   //FIXME replace request id manually
           "url": "https://www.albertsons.com",
           "pageurl": "https://www.albertsons.com",
           "pagename": "search",
@@ -140,7 +140,7 @@ async function getAlbertsonsResults(query, locations) {
       res.distance = locationIds[i].distance
       res.query = queryArray[i]
       item[queryArray[i]].push(new SearchItem(res))
-    });
+    })
   }
   return item
 }
