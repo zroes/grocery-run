@@ -1,7 +1,7 @@
+import { query } from "express"
 import { SearchItem } from "../models/SearchItem.js"
 import { searchService } from "../services/SearchService.js"
-// import { listSearchService } from "../services/ListSearchService.js"
-import { refactoredSearchService } from "../services/RefactoredSearch.js"
+import { listSearchService } from "../services/ListSearchService.js"
 import BaseController from "../utils/BaseController.js"
 import { refactoredSearchService } from "../services/RefactoredSearch.js"
 
@@ -31,8 +31,8 @@ export class SearchController extends BaseController {
     try {
       const query = req.body.query
       const locations = req.body.locations
-      const krogerResults = await refactoredSearchService.getItemsFromListForTrip(query, locations)
-      const albertsonsResults = await refactoredSearchService.getAlbertsonsItems(query, locations[3])
+      const krogerResults = await listSearchService.getItemsFromListForTrip(query, locations)
+      const albertsonsResults = await listSearchService.getAlbertsonsItems(query, locations[3])
       const results = {}
       if (albertsonsResults[0] == undefined)
         query.forEach(q => {
