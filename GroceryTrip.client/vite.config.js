@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: '../GroceryTrip/wwwroot',
+    outDir: '../GroceryTrip/client',
     sourcemap: false
   },
   server: {
