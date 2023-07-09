@@ -6,7 +6,7 @@
     <div class="col-9">
       <div class="d-flex justify-content-between">
         <h6>
-          <img class="img-fluid logo me-2" width="90" src="../assets/img/fredmeyer logo.png" alt="Fred Meyer"
+          <img class="img-fluid logo me-2" width="90" src="../assets/img/fredmeyer-logo.png" alt="Fred Meyer"
             v-if="r.store?.includes('FRED MEYER')">
           <img class="img-fluid logo me-2" width="90"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Albertsons_logo.svg/2560px-Albertsons_logo.svg.png"
