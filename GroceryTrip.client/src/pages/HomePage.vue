@@ -8,6 +8,13 @@
       <SearchBar :sortType="sortType" />
     </div>
 
+    <div class="row justify-content-center p-2 mt-5" v-else>
+      <div class="col-10">
+        <h4 class="text-center text-light opacity-75">Please login to continue</h4>
+        <h5 class="text-center text-light opacity-50 p-3">Tap / click <i class="mdi mdi-menu"></i></h5>
+      </div>
+    </div>
+
 
     <!-- SECTION Trip component goes here -->
     <section class="row justify-content-center my-3 rounded m-1 bg-grey py-2" v-if="account.id">
